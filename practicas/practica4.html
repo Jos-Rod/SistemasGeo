@@ -21,10 +21,10 @@
     <div class="container-fluid">
         <div class="container">
 
-            <div class="card mt-5 shadow">
+            <div class="card mt-5 shadow"> 
                 <div class="card-body">
-                    <h4>Haz clic para obtener las coordenadas de tu dispositivo</h4>
-                    <button class="btn btn-secondary m-3" onclick="obtieneUbicacion()">Obtener Coordenadas</button>
+                    <h4>Haz clic para obtener las coordenadas de Apple Inc.</h4>
+                    <button class="btn btn-secondary m-3" onclick="obtieneUbicacion()">Obtener Coordenadas de Apple</button>
                     <p id="mensaje"></p>
         
                     <div class="container shadow" id="mapa" style="text-align: center;"></div>
@@ -40,16 +40,16 @@
     function obtieneUbicacion() {
 
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(muestraPosicion);
+        // navigator.geolocation.getCurrentPosition(muestraPosicion);
+        muestraPosicion();
       } else { 
         x.innerHTML = "El navegador no dispone la capacidad de geolocalización";
       }
     }
     
     function muestraPosicion(posicion) {
-      var coordenadas = posicion.coords.latitude + "," + posicion.coords.longitude;
-      var imagenurl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coordenadas + "&zoom=16&size=800x600&sensor=false&markers=color:blue%7Clabel:A%7C" + coordenadas + "&key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA";
-      document.getElementById("mapa").innerHTML = "<img src='"+imagenurl+"' style='width: 70%'><p class='m-4'>Las coordenadas de tu ubicación son: " + coordenadas + "</p>";
+      var imagenurl = "https://maps.googleapis.com/maps/api/staticmap?center=37.334844,-122.009006&zoom=16&size=800x600&sensor=false&markers=color:blue%7Clabel:A%7C37.334844,-122.009006&key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA";
+      document.getElementById("mapa").innerHTML = "<img src='"+imagenurl+"' style='width: 70%'><p class='m-4'>Las coordenadas de la mejor empresa del mundo son: 37.334844, -122.009006</p>";
     }
 
     </script>
