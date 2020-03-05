@@ -19,11 +19,82 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">Prácticas</h5>
-            <a href="practicas/practica1.html">Práctica 1</a> <br>
-            <a href="practicas/practica2.html">Práctica 2</a> <br>
-            <a href="practicas/practica3.html">Práctica 3</a> <br>
-            <a href="practicas/practica4.html">Práctica 4</a> <br>
-            <a href="practicas/practica5.html">Práctica 5</a> <br>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="mapas-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mapas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="usingfirebase-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Usando Firebase</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="mapas-tab">
+
+                <div class="row mt-4">
+                  <div class="col-sm-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Práctica 1</h5>
+                        <p class="card-text">Uso de el SDK de Google Maps, primera muestra.</p>
+                        <a href="practicas/practica1.html" class="btn btn-primary">Ver la práctica</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Práctica 2</h5>
+                        <p class="card-text">Se obtienen datos del navegador.</p>
+                        <a href="practicas/practica2.html" class="btn btn-primary">Ver la práctica</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Práctica 3</h5>
+                        <p class="card-text">Concediéndo el permiso de ubicación en el navegador, se obtienen las coordenadas del usuario.</p>
+                        <a href="practicas/practica3.html" class="btn btn-primary">Ver la práctica</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Práctica 4</h5>
+                        <p class="card-text">Se obtienen las coordenadas de Apple (fijas) e igualmente una captura del mapa, que contiene un marker en la ubicación.</p>
+                        <a href="practicas/practica4.html" class="btn btn-primary">Ver la práctica</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Práctica 5</h5>
+                        <p class="card-text">Nos posicionamos sobre los HQ de Apple, poniendo también un infoWindow con el logo de Apple.</p>
+                        <a href="practicas/practica5.html" class="btn btn-primary">Ver la práctica</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="usingfirebase-tab">
+
+                <div class="row mt-4">
+                  <div class="col-sm-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Práctica 6</h5>
+                        <p class="card-text">Uso de firebase para tener un catálogo de productos.</p>
+                        <a href="firebase/practica6.html" class="btn btn-primary">Ver la práctica</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
           <div class="card-footer text-muted">
             Materia de Sistemas Georeferenciados

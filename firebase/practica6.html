@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+
+</head>
+<body style="background-color: coral;">
+
+    <div class="container-fluid">
+        <div class="container shadow p-4 mt-1" style="border-radius: 15px; background-color: white;">
+            <div class="row">
+                <div class="col-12 m-3">
+                    <h1>Categorías de productos</h1>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Carretes</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Señuelos</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Plomos</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                            <div class="row mt-2">
+                                <div class="col-6 d-flex" style="align-items: center; justify-content: center;">
+                                    <form id="forma">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="codigo" placeholder="Codigo">
+                                            </div>
+                                        </div>
+                                        <div class="mt-2" style="text-align: center;">
+                                            <button type="submit" class="btn btn-success mt-2">Agregar Carrete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-6">
+                                    <div class="container shadow mr-3" style="border-radius: 15px">
+                                        <ul id="list" class="list-group" style="list-style-type:none;"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                            <div class="row mt-2">
+                                <div class="col-6 d-flex" style="align-items: center; justify-content: center;">
+                                    <form id="formaLures">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="tipo" placeholder="Tipo del Señuelo">
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="codigo" placeholder="Codigo">
+                                            </div>
+                                            <div class="col-6 mt-2">
+                                                <input type="text" class="form-control" name="color" placeholder="Color">
+                                            </div>
+                                            <div class="col-6 mt-2">
+                                                <input type="text" class="form-control" name="size" placeholder="Tamaño">
+                                            </div>
+                                        </div>
+                                        <div class="mt-2" style="text-align: center;">
+                                            <button type="submit" class="btn btn-success mt-2">Agregar Señuelo</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-6">
+                                    <div class="container shadow mr-3" style="border-radius: 15px">
+                                        <ul id="listLures" class="list-group" style="list-style-type:none;"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+                            <div class="row mt-2">
+                                <div class="col-6 d-flex" style="align-items: center; justify-content: center;">
+                                    <form id="formaPlomos">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" name="codigo" placeholder="Codigo">
+                                            </div>
+                                        </div>
+                                        <div class="mt-2" style="text-align: center;">
+                                            <button type="submit" class="btn btn-success mt-2">Agregar Plomo</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-6">
+                                    <div class="container shadow mr-3" style="border-radius: 15px">
+                                        <ul id="listPlomos" class="list-group" style="list-style-type:none;"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBdqxDiJ_hieH74v1wxrzChCSqtm-W03hA",
+            authDomain: "sistemasgeo66077.firebaseapp.com",
+            databaseURL: "https://sistemasgeo66077.firebaseio.com",
+            projectId: "sistemasgeo66077",
+            storageBucket: "sistemasgeo66077.appspot.com",
+            messagingSenderId: "800871967758",
+            appId: "1:800871967758:web:0c472ad451219fac43e05f"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const productsList = document.querySelector("#list");// query selector, trae la primera referencia
+        const plomosList = document.querySelector("#listPlomos");
+        const luresList = document.querySelector("#listLures");
+        const formulario = document.querySelector("#forma");
+        const formularioPlomos = document.querySelector("#formaPlomos");
+        const formularioLures = document.querySelector("#formaLures")
+
+        db.collection('productos').onSnapshot( (snap) => {
+            let changes = snap.docChanges();
+            changes.forEach( change => {
+                
+                if (change.type == "added") {
+                    agregarElementoALista(change.doc, productsList, "productos");
+                } else if (change.type == "removed") {
+                    let valorId = document.getElementById(change.doc.id);
+                    productsList.removeChild(valorId);
+                }
+                
+            });
+        });
+
+        db.collection('plomos').onSnapshot( (snap) => {
+            let changes = snap.docChanges();
+            changes.forEach( change => {
+                
+                if (change.type == "added") {
+                    agregarElementoALista(change.doc, plomosList, "plomos");
+                } else if (change.type == "removed") {
+                    let valorId = document.getElementById(change.doc.id);
+                    plomosList.removeChild(valorId);
+                }
+                
+            });
+        });
+
+        db.collection('lures').onSnapshot( (snap) => {
+            let changes = snap.docChanges();
+            changes.forEach( change => {
+                
+                if (change.type == "added") {
+                    agregarElementoAListaLures(change.doc);
+                } else if (change.type == "removed") {
+                    let valorId = document.getElementById(change.doc.id);
+                    luresList.removeChild(valorId);
+                }
+                
+            });
+        });
+
+        function agregarElementoAListaLures(d) {
+            let li = document.createElement("li");
+            li.className = "d-flex m-3";
+            li.style = "justify-content: space-between";
+            let tipo = document.createElement("span"); // span no hace nada, pero se le puede poner texto
+            tipo.className = "mr-2";
+            let codigo = document.createElement("span");
+            codigo.className = "mr-2";
+            let color = document.createElement("span");
+            color.className = "mr-2";
+            let size = document.createElement("span");
+            size.className = "mr-2";
+            let botonBorrar = document.createElement("button");
+            botonBorrar.className = "btn btn-danger mr-2";
+
+            li.setAttribute("id", d.id);
+
+            tipo.textContent = d.data().tipo;
+            codigo.textContent = d.data().codigo;
+            color.textContent = d.data().color;
+            size.textContent = d.data().size;
+            botonBorrar.textContent = "Delete";
+
+            li.appendChild(botonBorrar);
+            li.appendChild(tipo);
+            li.appendChild(color);
+            li.appendChild(size);
+            li.appendChild(codigo);
+
+            botonBorrar.addEventListener("click", (e) => {
+                let id = e.target.parentElement.getAttribute("id");
+                console.log("Id a eliminar: " + id);
+                db.collection("lures").doc(id).delete();
+            });
+
+            luresList.appendChild(li);
+        }
+
+        function agregarElementoALista(d, list, collection) {
+            let li = document.createElement("li");
+            li.className = "d-flex m-3";
+            li.style = "justify-content: space-between";
+            let nombre = document.createElement("span"); // span no hace nada, pero se le puede poner texto
+            nombre.className = "mr-2";
+            let codigo = document.createElement("span");
+            codigo.className = "mr-2";
+            let botonBorrar = document.createElement("button");
+            botonBorrar.className = "btn btn-danger mr-2";
+
+            li.setAttribute("id", d.id);
+
+            nombre.textContent = d.data().nombre;
+            codigo.textContent = d.data().codigo;
+            botonBorrar.textContent = "Delete";
+
+            li.appendChild(botonBorrar);
+            li.appendChild(nombre);
+            li.appendChild(codigo);
+
+            botonBorrar.addEventListener("click", (e) => {
+                let id = e.target.parentElement.getAttribute("id");
+                console.log("Id a eliminar: " + id);
+                db.collection(collection).doc(id).delete();
+            });
+            
+            list.appendChild(li);
+        }
+
+        formulario.addEventListener("submit", (e) => {
+            e.preventDefault(); // prevenir que la pagina se actualice
+            db.collection("productos").add(
+                {
+                    nombre : formulario.nombre.value,
+                    codigo : formulario.codigo.value
+                }
+            );
+        });
+
+        formularioPlomos.addEventListener("submit", (e) => {
+            e.preventDefault(); // prevenir que la pagina se actualice
+            db.collection("plomos").add(
+                {
+                    nombre : formularioPlomos.nombre.value,
+                    codigo : formularioPlomos.codigo.value
+                }
+            );
+        });
+
+        formularioLures.addEventListener("submit", (e) => {
+            e.preventDefault(); // prevenir que la pagina se actualice
+            db.collection("lures").add(
+                {
+                    tipo : formularioLures.tipo.value,
+                    codigo : formularioLures.codigo.value,
+                    size : formularioLures.size.value,
+                    color : formularioLures.color.value
+                }
+            );
+        });
+
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+</body>
+</html>
