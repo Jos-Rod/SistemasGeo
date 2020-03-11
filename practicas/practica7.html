@@ -9,6 +9,11 @@
         #map {
             height: 100%;
         }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 
 </head>
@@ -34,9 +39,9 @@
                 url: "https://cdn.icon-icons.com/icons2/1463/PNG/128/whatsapp-black_100119.png",
                 scaledSize: new google.maps.Size(50,50),
                 origin: new google.maps.Point(0,0),
-                anchor: new google.map.Point(0,0)
+                anchor: new google.maps.Point(0,0)
             };
-            var marker = new google.maps.marker({
+            var marker = new google.maps.Marker({
                 position: {
                     lat: 21.168614,
                     lng: -101.692980
@@ -60,7 +65,8 @@
                 var pos = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
-                }
+                };
+                console.log(pos);
 
                 marker.setPosition( new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
                 map.panTo( new google.maps.LatLng(position.coords.latitude, position.coords.longitude)); // movimiento del mapa en la pantalla
