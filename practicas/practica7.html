@@ -48,7 +48,10 @@
 
             if (navigator.geolocation) {
                 //ejecutar funcion para posicionar el marcador
-                moverPosicion(marker);
+                setInterval(function () {
+                    moverPosicion(marker);
+                }, 3000)
+                
             }
         }
 
@@ -59,8 +62,8 @@
                     lng: position.coords.longitude
                 }
 
-                marker.setPosition( new google.maps.latlng(position.coords.latitude, position.coords.longitude));
-                map.panTo( new google.maps.latlng(position.coords.latitude, position.coords.longitude)); // movimiento del mapa en la pantalla
+                marker.setPosition( new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                map.panTo( new google.maps.LatLng(position.coords.latitude, position.coords.longitude)); // movimiento del mapa en la pantalla
                 map.setCenter(pos);
 
             });
