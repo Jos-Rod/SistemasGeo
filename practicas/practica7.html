@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <title>Document</title>
 
     <style>
@@ -17,9 +21,17 @@
     </style>
 
 </head>
-<body>
-    
-<div id="map"></div>
+<body style="background-color: cadetblue;">
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="mt-5 card shadow" style="background-color: coral; height: 500px;">
+                <h2 class="text-center mt-4" style="color: white;">Esta es tu ubicación en el mundo</h2>
+                <hr class="mr-5 ml-5" style="background-color: white;">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
 
@@ -36,7 +48,8 @@
             map = new google.maps.Map(document.getElementById("map"), propiedades);
 
             var icono = {
-                url: "https://cdn.icon-icons.com/icons2/1463/PNG/128/whatsapp-black_100119.png",
+                //url: "https://cdn.icon-icons.com/icons2/1463/PNG/128/whatsapp-black_100119.png", https://cdn.dribbble.com/users/174627/screenshots/4891881/dribbble_jumpingpin.gif?vid=1
+                url: "https://cdn.dribbble.com/users/174627/screenshots/4891881/dribbble_jumpingpin.gif?vid=1",
                 scaledSize: new google.maps.Size(50,50),
                 origin: new google.maps.Point(0,0),
                 anchor: new google.maps.Point(0,0)
@@ -77,6 +90,12 @@
         }
 
     </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=initMap" async defer></script>
 </body>
