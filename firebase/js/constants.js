@@ -6,6 +6,9 @@ const formularioPlomos = document.querySelector("#formaPlomos");
 const formularioLures = document.querySelector("#formaLures");
 
 const btnGuardarCambiosEditar = document.querySelector("#btnGuardarCambiosEditarCarretePlomo");
+const btnGuardarCambiosEditarLures = document.querySelector("#btnGuardarCambiosEditarLures");
 
 //formulario del modal editar
 const formularioEditarCarretePlomo = document.querySelector("#formEditar");
+
+const formularioEditarLures = document.querySelector("#formEditarLures");

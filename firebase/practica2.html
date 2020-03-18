@@ -128,7 +128,7 @@
         </div>
     </div>
     
-    <!-- Modal para editar -->
+    <!-- Modal para editar carretes y plomos -->
     <div class="modal fade" id="modalEditarCarretePlomo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -147,14 +147,34 @@
         </div>
     </div>
 
+    <!-- Modal para editar señuelos -->
+    <div class="modal fade" id="modalEditarLures" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="m-4">
+                    <h4>Puedes editar el producto</h4>
+                    <form id="formEditarLures">
+                        <input type="tel" hidden id="idEditar" >
+                        <input type="text" class="form-control inputsCortos" placeholder="Tipo" name="tipoEditar">
+                        <input type="text" class="form-control inputsCortos" placeholder="Código" name="codigoEditar">
+                        <input type="text" class="form-control inputsCortos" placeholder="Size" name="sizeEditar">
+                        <input type="text" class="form-control inputsCortos" placeholder="Color" name="colorEditar">
+                        <button class="btn btn-primary m-3" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-warning m-2" id="btnGuardarCambiosEditarLures">Guardar cambios</button>
+                    </form>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
     <script src="js/db.js"></script> 
     <script src="js/registro.js"></script>
+    <script src="js/registroLures.js"></script>
     <script src="js/constants.js"></script>
     <script src="js/submits.js"></script>
 
     <script>
-
-        
 
         function agregarElementoAListaLures(d) {
             let li = document.createElement("li");
@@ -171,6 +191,12 @@
             let botonBorrar = document.createElement("button");
             botonBorrar.className = "btn btn-danger mr-2";
 
+            let botonEditar = document.createElement("button");
+            botonEditar.className = "btn btn-success mr-2";
+
+            //create object
+            var registro = new RegistroLures(d.id, d.data().tipo, d.data().codigo, d.data().size, d.data().color);
+
             li.setAttribute("id", d.id);
 
             tipo.textContent = d.data().tipo;
@@ -178,8 +204,10 @@
             color.textContent = d.data().color;
             size.textContent = d.data().size;
             botonBorrar.textContent = "Delete";
+            botonEditar.textContent = "Editar";
 
             li.appendChild(botonBorrar);
+            li.appendChild(botonEditar);
             li.appendChild(tipo);
             li.appendChild(color);
             li.appendChild(size);
@@ -187,8 +215,14 @@
 
             botonBorrar.addEventListener("click", (e) => {
                 let id = e.target.parentElement.getAttribute("id");
-                console.log("Id a eliminar: " + id);
                 db.collection("lures").doc(id).delete();
+            });
+
+            botonEditar.setAttribute("data-toggle", "modal");
+            botonEditar.setAttribute("data-target", "#modalEditarLures");
+            botonEditar.addEventListener("click", (e) => {
+                registro.editar();
+                formularioEditarLures.setAttribute("id", registro.id);
             });
 
             luresList.appendChild(li);
@@ -230,7 +264,7 @@
             botonEditar.setAttribute("data-toggle", "modal");
             botonEditar.setAttribute("data-target", "#modalEditarCarretePlomo");
             botonEditar.addEventListener("click", (e) => {
-                registro.editar(registro.id);
+                registro.editar();
                 formularioEditarCarretePlomo.setAttribute("id", registro.id);
                 formularioEditarCarretePlomo.setAttribute("collection", collection);
             });
@@ -287,6 +321,10 @@
             e.preventDefault();
         });
 
+        formularioEditarLures.addEventListener("submit", (e) => {
+            e.preventDefault();
+        });
+
         btnGuardarCambiosEditar.addEventListener("click", (e) => {
             let id = e.target.parentElement.getAttribute("id");
             let collection = e.target.parentElement.getAttribute("collection");
@@ -294,6 +332,12 @@
             var registroAActualizar = new Registro(id, formularioEditarCarretePlomo.nombreEditar.value, formularioEditarCarretePlomo.codigoEditar.value);
             registroAActualizar.actualizar(collection);
 
+        });
+
+        btnGuardarCambiosEditarLures.addEventListener("click", (e) => {
+            let id = e.target.parentElement.getAttribute("id");
+            var registroAActualizar = new RegistroLures(id, formularioEditarLures.tipoEditar.value, formularioEditarLures.codigoEditar.value, formularioEditarLures.sizeEditar.value, formularioEditarLures.colorEditar.value);
+            registroAActualizar.actualizar();
         });
         
     </script>

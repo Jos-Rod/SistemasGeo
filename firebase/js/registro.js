@@ -16,7 +16,7 @@ class Registro {
         });
     }
 
-    editar(id) {
+    editar() {
         formularioEditarCarretePlomo.nombreEditar.value = this.nombre;
         formularioEditarCarretePlomo.codigoEditar.value = this.codigo;
     }
