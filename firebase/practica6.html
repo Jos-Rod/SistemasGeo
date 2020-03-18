@@ -252,12 +252,17 @@
 
         formulario.addEventListener("submit", (e) => {
             e.preventDefault(); // prevenir que la pagina se actualice
+
             db.collection("productos").add(
                 {
                     nombre : formulario.nombre.value,
                     codigo : formulario.codigo.value
                 }
             );
+
+            // clean fields
+            formulario.reset();
+
         });
 
         formularioPlomos.addEventListener("submit", (e) => {
@@ -268,6 +273,10 @@
                     codigo : formularioPlomos.codigo.value
                 }
             );
+
+            // clean fields
+            formularioPlomos.reset();
+
         });
 
         formularioLures.addEventListener("submit", (e) => {
@@ -280,6 +289,10 @@
                     color : formularioLures.color.value
                 }
             );
+
+            // clean fields
+            formularioLures.reset();
+
         });
 
     </script>
