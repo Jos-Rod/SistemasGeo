@@ -10,6 +10,7 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
     <style>
         .inputsCortos {
@@ -40,23 +41,12 @@
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
+                            <div class="m-4" style="text-align: end;">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#modalAgregarCarrete">Nuevo carrete <i class="fas fa-plus-square"></i></button>
+                            </div>
+                            
                             <div class="row mt-2">
-                                <div class="col-6 d-flex" style="align-items: center; justify-content: center;">
-                                    <form id="forma">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" name="nombre" placeholder="Nombre">
-                                            </div>
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" name="codigo" placeholder="Codigo">
-                                            </div>
-                                        </div>
-                                        <div class="mt-2" style="text-align: center;">
-                                            <button type="submit" class="btn btn-success mt-2">Agregar Carrete</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-6">
+                                <div class="col-12">
                                     <div class="container shadow mr-3" style="border-radius: 15px">
                                         <ul id="list" class="list-group" style="list-style-type:none;"></ul>
                                     </div>
@@ -65,30 +55,12 @@
 
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
+                            <!--  -->
+                            <div class="m-4" style="text-align: end;">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#modalAgregarLure">Nuevo señuelo <i class="fas fa-plus-square"></i></button>
+                            </div>
                             <div class="row mt-2">
-                                <div class="col-6 d-flex" style="align-items: center; justify-content: center;">
-                                    <form id="formaLures">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" name="tipo" placeholder="Tipo del Señuelo">
-                                            </div>
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" name="codigo" placeholder="Codigo">
-                                            </div>
-                                            <div class="col-6 mt-2">
-                                                <input type="text" class="form-control" name="color" placeholder="Color">
-                                            </div>
-                                            <div class="col-6 mt-2">
-                                                <input type="text" class="form-control" name="size" placeholder="Tamaño">
-                                            </div>
-                                        </div>
-                                        <div class="mt-2" style="text-align: center;">
-                                            <button type="submit" class="btn btn-success mt-2">Agregar Señuelo</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-6">
+                                <div class="col-12">
                                     <div class="container shadow mr-3" style="border-radius: 15px">
                                         <ul id="listLures" class="list-group" style="list-style-type:none;"></ul>
                                     </div>
@@ -97,24 +69,12 @@
 
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-
+                            <!-- modalAgregarPlomo -->
+                            <div class="m-4" style="text-align: end;">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#modalAgregarPlomo">Nuevo plomo <i class="fas fa-plus-square"></i></button>
+                            </div>
                             <div class="row mt-2">
-                                <div class="col-6 d-flex" style="align-items: center; justify-content: center;">
-                                    <form id="formaPlomos">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" name="nombre" placeholder="Nombre">
-                                            </div>
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" name="codigo" placeholder="Codigo">
-                                            </div>
-                                        </div>
-                                        <div class="mt-2" style="text-align: center;">
-                                            <button type="submit" class="btn btn-success mt-2">Agregar Plomo</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-6">
+                                <div class="col-12">
                                     <div class="container shadow mr-3" style="border-radius: 15px">
                                         <ul id="listPlomos" class="list-group" style="list-style-type:none;"></ul>
                                     </div>
@@ -168,11 +128,69 @@
         </div>
     </div>
 
+    <!-- Modal para agregar carretes -->
+    <div class="modal fade" id="modalAgregarCarrete" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="m-4">
+                    <h4>Agrega un nuevo carrete</h4>
+                    <form id="formAgregarCarrete">
+                        <input type="text" class="form-control inputsCortos" placeholder="Nombre" name="nombre">
+                        <input type="text" class="form-control inputsCortos" placeholder="Código" name="codigo">
+                        <button class="btn btn-primary m-3" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-warning m-2" id="btnAgregarCarrete">Agregar Carrete</button>
+                    </form>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar plomos -->
+    <div class="modal fade" id="modalAgregarPlomo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="m-4">
+                    <h4>Agrega un nuevo plomo</h4>
+                    <form id="formAgregarPlomo">
+                        <input type="text" class="form-control inputsCortos" placeholder="Nombre" name="nombre">
+                        <input type="text" class="form-control inputsCortos" placeholder="Código" name="codigo">
+                        <button class="btn btn-primary m-3" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-warning m-2" id="btnAgregarCarrete">Agregar Plomo</button>
+                    </form>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar plomos -->
+    <div class="modal fade" id="modalAgregarLure" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="m-4">
+                    <h4>Agrega un nuevo plomo</h4>
+                    <form id="formAgregarLure">
+                        <input type="text" class="form-control inputsCortos" placeholder="Tipo" name="tipo">
+                        <input type="text" class="form-control inputsCortos" placeholder="Código" name="codigo">
+                        <input type="text" class="form-control inputsCortos" placeholder="Tamaño" name="size">
+                        <input type="text" class="form-control inputsCortos" placeholder="Color" name="color">
+                        <button class="btn btn-primary m-3" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-warning m-2" id="btnAgregarCarrete">Agregar Plomo</button>
+                    </form>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
     <script src="js/db.js"></script> 
     <script src="js/registro.js"></script>
     <script src="js/registroLures.js"></script>
     <script src="js/constants.js"></script>
-    <script src="js/submits.js"></script>
+    <script src="js/escuchasBD.js"></script>
+    <script src="js/accionesFormularios.js"></script>
+    <script src="js/accionesFormsEditar.js"></script>
 
     <script>
 
@@ -214,8 +232,7 @@
             li.appendChild(codigo);
 
             botonBorrar.addEventListener("click", (e) => {
-                let id = e.target.parentElement.getAttribute("id");
-                db.collection("lures").doc(id).delete();
+                registro.borrar();
             });
 
             botonEditar.setAttribute("data-toggle", "modal");
@@ -272,73 +289,6 @@
             list.appendChild(li);
         }
 
-        formulario.addEventListener("submit", (e) => {
-            e.preventDefault(); // prevenir que la pagina se actualice
-
-            db.collection("productos").add(
-                {
-                    nombre : formulario.nombre.value,
-                    codigo : formulario.codigo.value
-                }
-            );
-
-            // clean fields
-            formulario.reset();
-
-        });
-
-        formularioPlomos.addEventListener("submit", (e) => {
-            e.preventDefault(); // prevenir que la pagina se actualice
-            db.collection("plomos").add(
-                {
-                    nombre : formularioPlomos.nombre.value,
-                    codigo : formularioPlomos.codigo.value
-                }
-            );
-
-            // clean fields
-            formularioPlomos.reset();
-
-        });
-
-        formularioLures.addEventListener("submit", (e) => {
-            e.preventDefault(); // prevenir que la pagina se actualice
-            db.collection("lures").add(
-                {
-                    tipo : formularioLures.tipo.value,
-                    codigo : formularioLures.codigo.value,
-                    size : formularioLures.size.value,
-                    color : formularioLures.color.value
-                }
-            );
-
-            // clean fields
-            formularioLures.reset();
-
-        });
-
-        formularioEditarCarretePlomo.addEventListener("submit", (e) => {
-            e.preventDefault();
-        });
-
-        formularioEditarLures.addEventListener("submit", (e) => {
-            e.preventDefault();
-        });
-
-        btnGuardarCambiosEditar.addEventListener("click", (e) => {
-            let id = e.target.parentElement.getAttribute("id");
-            let collection = e.target.parentElement.getAttribute("collection");
-
-            var registroAActualizar = new Registro(id, formularioEditarCarretePlomo.nombreEditar.value, formularioEditarCarretePlomo.codigoEditar.value);
-            registroAActualizar.actualizar(collection);
-
-        });
-
-        btnGuardarCambiosEditarLures.addEventListener("click", (e) => {
-            let id = e.target.parentElement.getAttribute("id");
-            var registroAActualizar = new RegistroLures(id, formularioEditarLures.tipoEditar.value, formularioEditarLures.codigoEditar.value, formularioEditarLures.sizeEditar.value, formularioEditarLures.colorEditar.value);
-            registroAActualizar.actualizar();
-        });
         
     </script>
 

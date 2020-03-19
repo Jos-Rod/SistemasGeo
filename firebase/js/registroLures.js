@@ -8,7 +8,7 @@ class RegistroLures {
     }
 
     borrar(id) {
-        db.collection("lures").doc(id).delete();
+        db.collection("lures").doc(this.id).delete();
     }
 
     agregar() {

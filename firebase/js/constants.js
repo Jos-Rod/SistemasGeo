@@ -12,3 +12,7 @@ const btnGuardarCambiosEditarLures = document.querySelector("#btnGuardarCambiosE
 const formularioEditarCarretePlomo = document.querySelector("#formEditar");
 
 const formularioEditarLures = document.querySelector("#formEditarLures");
+
+const formularioAgregarCarrete = document.querySelector("#formAgregarCarrete");
+const formularioAgregarPlomo = document.querySelector("#formAgregarPlomo");
+const formularioAgregarLure = document.querySelector("#formAgregarLure");
