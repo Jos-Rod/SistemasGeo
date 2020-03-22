@@ -55,6 +55,9 @@
                 console.log(pos);
 
                 // update firebase location
+                db.collection("locations").doc("8doxuwKkpW63Dh07hRHj").update({
+                    watcherLocation: new firebase.firestore.GeoPoint(pos.lat, pos.lng);
+                });
 
             });
 
