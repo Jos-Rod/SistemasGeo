@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 2 Fetch</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="container mt-4">
+            <h3>The Coronavirus Spread on Countries:</h3>
+            <div class="row">
+                <div class="col-7"></div>
+                <div class="col-5">
+                    <p id="totalActiveCases">Total Active Cases: </p>
+                    <p id="totalDeaths">Total Deaths: </p>
+                    <p id="todayDeaths">Today Deaths: </p>
+                </div>
+            </div>
+            <div class="d-flex" style="justify-content: center;">
+                <img id="imageLoading" src="https://i.giphy.com/media/feN0YJbVs0fwA/giphy.webp" width="40%">
+            </div>
+            <div class="col">
+                <div class="row mt-4" id="paises">
+
+                    <!-- <div class="col-sm-4 mt-2">
+                        <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-6">
+                                      <h5 class="card-title">countrystring</h5>
+                                      <img width="100%" src="sourcestring">
+                                      <p><strong>Active: activestring</strong></p>
+                                      <p><strong>Today Deaths: todaydeathsstring</strong></p>
+                                  </div>
+                                  <div class="col-6">
+                                      <p class="card-text">Cases: casesstring</p>
+                                      <p class="card-text">Today Cases: todaycasesstring</p>
+                                      <p class="card-text">Total Deaths: totaldeathsstring</p>
+                                      <p class="card-text">Recovered:  recoveredstring</p>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // var obj = [{ country: "Mexico", cases: 203}, {country: "Panama", cases: 200}, {country: "Colombia", cases: 196}];
+
+        var paises = document.getElementById("paises");
+        var totalActive= document.getElementById("totalActiveCases");
+        var totalDeaths = document.getElementById("totalDeaths");
+        var todayDeaths = document.getElementById("todayDeaths");
+        var totalDeathsCounter = 0;
+        var totalActiveCounter = 0;
+        var todayDeathsCounter = 0;
+        
+
+
+        fetch('https://corona.lmao.ninja/countries').then((res) => {
+            res.json().then((data) => {
+                data.map((country) => {
+                    paises.innerHTML += addDataToCard(country);
+                });
+                totalActive.innerHTML = "Total Active Cases: <strong>" + numberWithCommas(totalActiveCounter) + "<strong>";
+                totalDeaths.innerHTML = "Total Deaths: <strong>" + numberWithCommas(totalDeathsCounter) + "<strong>";
+                todayDeaths.innerHTML = "Today Deaths: <strong>" + numberWithCommas(todayDeathsCounter) + "<strong>";
+                document.getElementById("imageLoading").style.display = "none";
+            });
+        });
+
+        var card = '<div class="col-sm-4 mt-2"> <div class="card"> <div class="card-body"> <div class="row"> <div class="col-6"> <h5 class="card-title">countrystring</h5> <img width="100%" src="sourcestring"> <p><strong>Active: activestring</strong></p> <p><strong>Today Deaths: todaydeathsstring</strong></p> </div> <div class="col-6"> <p class="card-text mt-5">Cases: casesstring</p> <p class="card-text">Today Cases: todaycasesstring</p> <p class="card-text">Total Deaths: totaldeathsstring</p> <p class="card-text">Recovered: recoveredstring</p> </div> </div> </div> </div> </div>';
+
+        function addDataToCard(countryInfo) {
+
+            totalDeathsCounter += countryInfo.deaths;
+            totalActiveCounter += countryInfo.active;
+            todayDeathsCounter += countryInfo.todayDeaths;
+
+            var newCard = card;
+            newCard = newCard.replace("countrystring", numberWithCommas(countryInfo.country));
+            newCard = newCard.replace("activestring", numberWithCommas(countryInfo.active));
+            newCard = newCard.replace("casesstring", numberWithCommas(countryInfo.cases));
+            newCard = newCard.replace("todaycasesstring", numberWithCommas(countryInfo.todayCases));
+            newCard = newCard.replace("totaldeathsstring", numberWithCommas(countryInfo.deaths));
+            newCard = newCard.replace("recoveredstring", numberWithCommas(countryInfo.recovered));
+            newCard = newCard.replace("todaydeathsstring", numberWithCommas(countryInfo.todayDeaths)); 
+
+            if (countryInfo.country == "USA") {
+                newCard = newCard.replace("sourcestring", "https://lh4.googleusercontent.com/proxy/zmpPkqkTaA9HvXXsJPbnijfBlNUtOk6n5KRPrUarGzdgM-jUtpdj9YHIlvc2duGNKjTeiGRqux5WMQL0bZnUimQoBltosCrKNOtRu9mOierddLjfTLh44fDwa_zGu7csLlNZssP4YmftKQAFZWs4olhMtiqUoKlkUqT_WbO5r1sirvTOr1DdE5J8V5UqLm1mW6kfdqgUa7w=s0-d");
+            } else if (countryInfo.country == "Iran") {
+                newCard = newCard.replace("sourcestring", "https://cdn.webshopapp.com/shops/94414/files/54029446/iran-flag-icon-free-download.jpg");
+            } else if (countryInfo.country == "S. Korea") {
+                newCard = newCard.replace("sourcestring", "https://cdn.webshopapp.com/shops/94414/files/54354268/south-korea-flag-icon-free-download.jpg");
+            } else if (countryInfo.country == "UK") {
+                newCard = newCard.replace("sourcestring", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Flag_of_Great_Britain_%281707%E2%80%931800%29.svg/1280px-Flag_of_Great_Britain_%281707%E2%80%931800%29.svg.png");
+            } else if (countryInfo.country == "Czechia") {
+                newCard = newCard.replace("sourcestring", "https://cdn.webshopapp.com/shops/94414/files/53825012/the-czech-republic-flag-icon-free-download.jpg");
+            } else {
+                newCard = newCard.replace("sourcestring", countryInfo.countryInfo.flag);
+            }
+
+            return newCard;
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

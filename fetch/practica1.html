@@ -20,12 +20,26 @@
 
     <script>
 
+        // var obj = [{ country: "Mexico", cases: 203}, {country: "Panama", cases: 200}, {country: "Colombia", cases: 196}];
+
         var paises = document.getElementById("paises");
         fetch('datos.json').then((res) => {
             res.json().then((data) => {
-                console.log(data);
-            })
+                data.map((country) => {
+                    console.log(country);
+                    let nombre = document.createElement("p");
+                    nombre.textContent = "Pais: " + country.country + " Casos: " + country.cases;
+                    paises.appendChild(nombre);
+                });
+            });
         });
+
+        // obj.map((country) => {
+        //     console.log(country);
+        //     let nombre = document.createElement("p");
+        //     nombre.textContent = "Pais: " + country.country + " Casos: " + country.cases;
+        //     paises.appendChild(nombre);
+        // });
 
     </script>
 
