@@ -56,6 +56,14 @@
 
             const markers = getMarkers();
 
+            markers.map((m) => {
+                let marker = new google.maps.Marker({
+                    map: map, 
+                    position: new google.maps.LatLng(m.latitude, m.longitude),
+                    title: m.name
+                })
+            });
+
         }
 
     </script>
