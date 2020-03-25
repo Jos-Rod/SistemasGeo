@@ -57,8 +57,8 @@
 
                                     let marker = new google.maps.Marker({
                                         map: map, 
-                                        position: new google.maps.LatLng(m.latitude, m.longitude),
-                                        title: country.CountryName + " with " +  + ""
+                                        position: new google.maps.LatLng(country.CapitalLatitude, country.CapitalLongitude),
+                                        title: country.CountryName + " with " + countryCOVIDinfo.cases + " cases"
                                     });
 
                                 }
