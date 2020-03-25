@@ -48,25 +48,25 @@
                     fetch('https://corona.lmao.ninja/countries').then((infoCoronavirusAll) => {
                         
                         infoCoronavirusAll.json().then((infoCoronavirus) => {
-                            console.log(infoCoronavirus);
-                        });
 
-                        data.map((country) => {
+                            data.map((country) => {
                             
-                            let countryCOVIDinfo = infoCoronavirus.filter((info) => { return info.country == country.CountryName });
+                                let countryCOVIDinfo = infoCoronavirus.filter((info) => { return info.country == country.CountryName });
 
-                            if (countryCOVIDinfo != null) {
+                                if (countryCOVIDinfo != null) {
 
-                                let marker = new google.maps.Marker({
-                                    map: map, 
-                                    position: new google.maps.LatLng(m.latitude, m.longitude),
-                                    title: country.CountryName + " with " +  + ""
-                                });
+                                    let marker = new google.maps.Marker({
+                                        map: map, 
+                                        position: new google.maps.LatLng(m.latitude, m.longitude),
+                                        title: country.CountryName + " with " +  + ""
+                                    });
 
-                            }
+                                }
+
+                            });
 
                         });
-
+                        
                     });
 
                 })
