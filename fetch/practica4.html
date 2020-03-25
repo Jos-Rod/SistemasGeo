@@ -50,26 +50,23 @@
                         infoCoronavirusAll.json().then((infoCoronavirus) => {
 
                             data.map((country) => {
-                            
-                                var countryCOVIDinfo = [];
 
-                                infoCoronavirus.map((info) => {
-                                    if (info.country == country.CountryName) {
-                                        countryCOVIDinfo = info;
+                                infoCoronavirus.map((countryCOVIDinfo) => {
+                                    if (countryCOVIDinfo.country == country.CountryName) {
+                                        
+                                        console.log(countryCOVIDinfo);
+                                        if (countryCOVIDinfo != null) {
+
+                                            let marker = new google.maps.Marker({
+                                                map: map, 
+                                                position: new google.maps.LatLng(country.CapitalLatitude, country.CapitalLongitude),
+                                                title: country.CountryName + " with " + countryCOVIDinfo[0].cases + " cases"
+                                            });
+
+                                        }
+
                                     }
                                 });
-
-
-                                console.log(infoCoronavirus);
-                                if (countryCOVIDinfo != null) {
-
-                                    let marker = new google.maps.Marker({
-                                        map: map, 
-                                        position: new google.maps.LatLng(country.CapitalLatitude, country.CapitalLongitude),
-                                        title: country.CountryName + " with " + countryCOVIDinfo[0].cases + " cases"
-                                    });
-
-                                }
 
                             });
 
