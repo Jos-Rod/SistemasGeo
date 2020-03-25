@@ -47,8 +47,9 @@
 
                     fetch('https://corona.lmao.ninja/countries').then((infoCoronavirusAll) => {
                         
-                        const infoCoronavirus = infoCoronavirusAll.json();
-                        console.log(infoCoronavirus);
+                        infoCoronavirusAll.json().then((infoCoronavirus) => {
+                            console.log(infoCoronavirus);
+                        });
 
                         data.map((country) => {
                             
