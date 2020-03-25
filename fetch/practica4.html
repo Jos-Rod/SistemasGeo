@@ -52,7 +52,7 @@
                             data.map((country) => {
                             
                                 let countryCOVIDinfo = infoCoronavirus.filter((info) => { return info.country == country.CountryName });
-                                print(countryCOVIDinfo);
+                                console.log(countryCOVIDinfo);
                                 if (countryCOVIDinfo != null) {
 
                                     let marker = new google.maps.Marker({
