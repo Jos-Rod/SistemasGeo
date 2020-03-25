@@ -59,7 +59,7 @@
                                         console.log(countryCOVIDinfo);
                                         if (countryCOVIDinfo != null) {
 
-                                            let information = "<strong>Pais: " + countryCOVIDinfo.country + "</strong> <br> Active Cases: <strong>" + countryCOVIDinfo.cases + "</strong> <br> Today Cases: <strong>" + countryCOVIDinfo.todayCases + "</strong> <br> Today Deaths: <strong>" + countryCOVIDinfo.todayDeaths + "</strong> <br> Total Deaths: <strong>" + countryCOVIDinfo.deaths + "</strong>"
+                                            let information = "<strong>Pais: " + countryCOVIDinfo.country + "</strong> <br> <img src='" + countryCOVIDinfo.countryInfo.flag + "' style='width='20%''> <br> Active Cases: <strong>" + countryCOVIDinfo.cases + "</strong> <br> Today Cases: <strong>" + countryCOVIDinfo.todayCases + "</strong> <br> Today Deaths: <strong>" + countryCOVIDinfo.todayDeaths + "</strong> <br> Total Deaths: <strong>" + countryCOVIDinfo.deaths + "</strong>"
                                             var infoWindow = new google.maps.InfoWindow({
                                                 content: information
                                             });
