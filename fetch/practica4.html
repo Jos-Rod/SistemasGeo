@@ -51,7 +51,15 @@
 
                             data.map((country) => {
                             
-                                let countryCOVIDinfo = infoCoronavirus.filter((info) => { return info.country == country.CountryName });
+                                var countryCOVIDinfo = [];
+
+                                infoCoronavirus.map((info) => {
+                                    if (info.country == country.CountryName) {
+                                        countryCOVIDinfo = info;
+                                    }
+                                });
+
+
                                 console.log(countryCOVIDinfo);
                                 if (countryCOVIDinfo != null) {
 
