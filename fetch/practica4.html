@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coronavirus Map</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="container mt-5">
+            <div id="map" style="height: 700px; width: auto;"></div>
+        </div>
+    </div>
+
+    <script>
+
+        var coordinates = {
+            lat: 0,
+            lng: 0
+        };
+
+        var properties = {
+            center: coordinates, 
+            zoom: 2
+        };
+
+        function initMap() {
+
+            // const map = new google.maps.Map(document.getElementById("map"), properties);
+            
+            // markers.map((m) => {
+            //     let marker = new google.maps.Marker({
+            //         map: map, 
+            //         position: new google.maps.LatLng(m.latitude, m.longitude),
+            //         title: m.name
+            //     })
+            // });
+
+            fetch('paises.json').then((res) =>
+                res.json().then((data) => {
+                    const map = new google.maps.Map(document.getElementById("map"), properties);
+                    
+
+                    fetch('https://corona.lmao.ninja/countries').then((infoCoronavirusAll) => {
+                        
+                        const infoCoronavirus = infoCoronavirusAll.json();
+
+                        data.map((country) => {
+                            
+                            let countryCOVIDinfo = infoCoronavirus.filter((info) => { return info.country == country.CountryName });
+
+                            if (countryCOVIDinfo != null) {
+
+                                let marker = new google.maps.Marker({
+                                    map: map, 
+                                    position: new google.maps.LatLng(m.latitude, m.longitude),
+                                    title: country.CountryName + " with " +  + ""
+                                });
+
+                            }
+
+                        });
+
+                    });
+
+                })
+            }).catch((error) => {
+                console.log("Ha ocurrido un error: " + error);
+            });
+
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=initMap" async defer></script>
+
+</body>
+</html>
