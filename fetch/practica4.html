@@ -16,6 +16,8 @@
         </div>
     </div>
 
+    <!-- <strong>Pais: </strong> <br> Active Cases: <strong>3423</strong> <br> Today Cases: <strong>3423</strong> <br> Today Deaths: <strong>3423</strong> <br> Total Deaths: <strong>3423</strong> -->
+
     <script>
 
         var coordinates = {
@@ -57,10 +59,19 @@
                                         console.log(countryCOVIDinfo);
                                         if (countryCOVIDinfo != null) {
 
+                                            let information = "<strong>Pais: " + countryCOVIDinfo.country + "</strong> <br> Active Cases: <strong>" + countryCOVIDinfo.cases + "</strong> <br> Today Cases: <strong>" + countryCOVIDinfo.todayCases + "</strong> <br> Today Deaths: <strong>" + countryCOVIDinfo.todayDeaths + "</strong> <br> Total Deaths: <strong>" + countryCOVIDinfo.deaths + "</strong>"
+                                            var infoWindow = new google.maps.infoWindow({
+                                                content: information
+                                            });
+
                                             let marker = new google.maps.Marker({
                                                 map: map, 
                                                 position: new google.maps.LatLng(country.CapitalLatitude, country.CapitalLongitude),
                                                 title: country.CountryName + " with " + countryCOVIDinfo.cases + " cases"
+                                            });
+
+                                            marker.addListener('click', function() {
+                                                infoWindow.open(map, marker);
                                             });
 
                                         }
