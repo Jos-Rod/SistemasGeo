@@ -52,13 +52,13 @@
                             data.map((country) => {
                             
                                 let countryCOVIDinfo = infoCoronavirus.filter((info) => { return info.country == country.CountryName });
-
+                                print(countryCOVIDinfo);
                                 if (countryCOVIDinfo != null) {
 
                                     let marker = new google.maps.Marker({
                                         map: map, 
                                         position: new google.maps.LatLng(country.CapitalLatitude, country.CapitalLongitude),
-                                        title: country.CountryName + " with " + countryCOVIDinfo.cases + " cases"
+                                        title: country.CountryName + " with " + countryCOVIDinfo[0].cases + " cases"
                                     });
 
                                 }
