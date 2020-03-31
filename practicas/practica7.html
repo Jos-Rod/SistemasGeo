@@ -65,12 +65,13 @@
                 {lat: -42.734358, lng: 147.501315},
                 {lat: -42.735258, lng: 147.438000},
                 {lat: -43.999792, lng: 170.463352}
-            ]
+            ];
+            var mapa;
 
           function initMap() {
             
 
-            var mapa = new google.maps.Map(
+            mapa = new google.maps.Map(
               document.getElementById("mapa"), {
                 center: coordenadas,
                 zoom: 3,
@@ -86,7 +87,7 @@
                 });
             });
 
-            var markerCluster = new markerCluster(mapa, markers, {
+            var markerCluster = new MarkerClusterer(mapa, markers, {
               imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
               gridSize: 60,
               zoomOnClick: true,
