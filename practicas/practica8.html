@@ -41,7 +41,7 @@
                                         <select class="form-control" name="countrySelected" id="countriesSelect" style="width: auto;" onchange="cambioPais()">
                                             <!-- <option value="asdf">ASDF</option> -->
                                         </select>
-                                        <p id="infoCountry"></p>
+                                        <p id="infoCountry" class="mt-2"></p>
                                     </div>
                                 </div>
                             </div>
@@ -132,6 +132,13 @@
             });
             
             document.getElementById("infoCountry").innerHTML = textoAMostrar;
+
+            // center map on country
+            var pos = {
+                        lat: countrySelected.latlng[0], // Apple's HQ 
+                        lng: countrySelected.latlng[1]
+                    };
+            mapa.setCenter(pos);
 
         }
 
