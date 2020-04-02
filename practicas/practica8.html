@@ -39,7 +39,7 @@
                                     <div class="col-12 mt-3">
                                         <h5>Información de los países</h5>
                                         <select class="form-control" name="countrySelected" id="countriesSelect" style="width: auto;" onchange="cambioPais()">
-                                            <option value="asdf">ASDF</option>
+                                            <!-- <option value="asdf">ASDF</option> -->
                                         </select>
                                         <p id="infoCountry"></p>
                                     </div>
@@ -120,6 +120,7 @@
             const countrySelected = countiesInfo.filter(function(ci) {
                 return ci.country_code == countryCodeSelected;
             });
+            countrySelected = countrySelected[0];
 
             console.log(countrySelected);
             var textoAMostrar = "";
