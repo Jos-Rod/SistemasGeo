@@ -38,9 +38,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <p>Información de los países</p>
-                                        <select name="countrySelected" id="countriesSelect">
-
+                                        <select class="form-control" name="countrySelected" id="countriesSelect" style="width: auto;" onchange="cambioPais()">
                                         </select>
+                                        <p id="infoCountry"></p>
                                     </div>
                                 </div>
                             </div>
@@ -110,10 +110,24 @@
                         selectCountries.append(optionElement);
                     });
 
-                    // document.getElementById('idiomsSelect').value = idioma;
-
                 });
             });
+        }
+
+        function cambioPais() {
+            const countryCodeSelected = document.getElementById('idiomsSelect').value;
+            const countrySelected = countiesInfo.fiter(function(ci) {
+                return ci.country_code = countryCodeSelected;
+            });
+
+            var textoAMostrar = "";
+            textoAMostrar = textoAMostrar + "Nombre Pais: " + countrySelected.name + "<br>Capital: " + countrySelected.capital + "<br>Zonas horarias: "
+            countrySelected.timezones.map((t) => {
+                textoAMostrar = textoAMostrar + t;
+            });
+            
+            document.getElementById("infoCountry").innerHTML = textoAMostrar;
+
         }
 
     </script>
