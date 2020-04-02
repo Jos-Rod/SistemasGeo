@@ -30,7 +30,21 @@
                                 </select>
                             </div>
                         </div>
-                        <div id="mapa" style="width: auto;"></div>
+                        <div class="row">
+                            <div class="col-9">
+                                <div id="mapa" style="width: auto;"> </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>Información de los países</p>
+                                        <select name="countrySelected" id="countriesSelect">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,6 +55,7 @@
     <script src="scripts/langages.js"></script>
 
     <script>
+        var mapa;
         var coordenadas = {
               lat: -31.563910,
               lng:  147.154312
@@ -48,9 +63,11 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const idioma = urlParams.get('idiomsSelect');
+        var countiesInfo;
 
         // fill select
         var selectIdioms = document.getElementById('idiomsSelect');
+        var selectCountries = document.getElementById('countriesSelect');
 
         // add supported languages to select and set selected on the label
         fillLanguageSelectAndSetLabel()
@@ -62,7 +79,7 @@
         document.head.appendChild(script);
 
         function initMap() {
-            var mapa = new google.maps.Map(
+            mapa = new google.maps.Map(
                 document.getElementById("mapa"), {
                 center: coordenadas,
                 zoom: 3
@@ -84,7 +101,17 @@
         function fillCountriesSelect() {
             fetch('countries.json').then((res) => {
                 res.json().then((data) => {
-                    console.log(data);
+                    countiesInfo = data;
+
+                    countiesInfo.map((ci) => {
+                        var optionElement = document.createElement('option');
+                        optionElement.value = ci.country_code;
+                        optionElement.textContent = ci.name;
+                        selectCountries.append(optionElement);
+                    });
+
+                    // document.getElementById('idiomsSelect').value = idioma;
+
                 });
             });
         }
