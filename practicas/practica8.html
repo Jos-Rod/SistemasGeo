@@ -31,14 +31,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-9">
+                            <div class="col-12 col-xl-9">
                                 <div id="mapa" style="width: auto;"> </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-12 col-xl-3">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <p>Información de los países</p>
+                                    <div class="col-12 mt-3">
+                                        <h5>Información de los países</h5>
                                         <select class="form-control" name="countrySelected" id="countriesSelect" style="width: auto;" onchange="cambioPais()">
+                                            <option value="asdf">ASDF</option>
                                         </select>
                                         <p id="infoCountry"></p>
                                     </div>
@@ -116,7 +117,7 @@
 
         function cambioPais() {
             const countryCodeSelected = document.getElementById('idiomsSelect').value;
-            const countrySelected = countiesInfo.fiter(function(ci) {
+            const countrySelected = countiesInfo.filter(function(ci) {
                 return ci.country_code = countryCodeSelected;
             });
 
