@@ -20,7 +20,7 @@
             <div class="container bg-white rounded shadow-lg">
                 <div class="row m-5">
                     <div class="col-12 p-5 middle-items-center">
-                        <h1 class="text-center">Google Maps en Bootstrap</h1>
+                        <h1 class="text-center">Google Maps con idiomas</h1>
                         <div class="row d-flex m-3" style="justify-content: end;">
                             <div class="col-sm-12 col-md-6">
                                 <h5 style="text-align: end;" id="tituloIdioma">Actualmente estás viendo el mapa en el idioma: </h5>
@@ -120,6 +120,7 @@
             const countrySelected = countiesInfo.filter(function(ci) {
                 return ci.country_code = countryCodeSelected;
             });
+
 
             var textoAMostrar = "";
             textoAMostrar = textoAMostrar + "Nombre Pais: " + countrySelected.name + "<br>Capital: " + countrySelected.capital + "<br>Zonas horarias: "
