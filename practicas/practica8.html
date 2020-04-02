@@ -118,10 +118,10 @@
         function cambioPais() {
             const countryCodeSelected = document.getElementById('idiomsSelect').value;
             const countrySelected = countiesInfo.filter(function(ci) {
-                return ci.country_code = countryCodeSelected;
+                return ci.country_code == countryCodeSelected;
             });
 
-
+            console.log(countrySelected);
             var textoAMostrar = "";
             textoAMostrar = textoAMostrar + "Nombre Pais: " + countrySelected.name + "<br>Capital: " + countrySelected.capital + "<br>Zonas horarias: "
             console.log("Fimezones:");
