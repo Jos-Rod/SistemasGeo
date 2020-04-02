@@ -22,19 +22,15 @@
                     <div class="col-12 p-5 middle-items-center">
                         <h1 class="text-center">Google Maps en Bootstrap</h1>
                         <div class="row d-flex m-3" style="justify-content: end;">
-                            <div class="col-6">
-                                <h4 style="text-align: end;">Actualmente estás en idioma español</h4>
+                            <div class="col-sm-12 col-md-6">
+                                <h5 style="text-align: end;" id="tituloIdioma">Actualmente estás viendo el mapa en el idioma: </h5>
                             </div>
-                            <div class="col-6">
-                                <select class="form-control" id="idiomsSelect" onchange="this.form.submit()">
-                                    <option value="es">Español</option>
-                                    <option value="en">Inglés</option>
-                                    <option value="it">Italiano</option>
-                                    <option value="izh">Chino</option>
+                            <div class="col-sm-12 col-md-6">
+                                <select class="form-control" name="idiomsSelect" id="idiomsSelect" onchange="this.form.submit()">
                                 </select>
                             </div>
                         </div>
-                        <div id="mapa"></div>
+                        <div id="mapa" style="width: auto;"></div>
                     </div>
                 </div>
             </div>
@@ -42,30 +38,53 @@
 
     </form>
 
+    <script src="scripts/langages.js"></script>
+
     <script>
         var coordenadas = {
               lat: -31.563910,
               lng:  147.154312
             };
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const idioma = urlParams.get('idioma');
-        
-        document.getElementById('idiomsSelect').value = idioma;
+        const idioma = urlParams.get('idiomsSelect');
+
+        // fill select
+        var selectIdioms = document.getElementById('idiomsSelect');
+
+        // add supported languages to select and set selected on the label
+        fillLanguageSelectAndSetLabel()
+
+        fillCountriesSelect();
 
         var script = document.createElement('script');
         script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=initMap&language=" + idioma;
         document.head.appendChild(script);
 
         function initMap() {
-
             var mapa = new google.maps.Map(
                 document.getElementById("mapa"), {
                 center: coordenadas,
                 zoom: 3
                 }
             );
+        }
+
+        function fillLanguageSelectAndSetLabel() {
+            for (const [key, value] of Object.entries(SUPPORTED_LANGUAGES)) {
+                var optionElement = document.createElement('option');
+                optionElement.value = key;
+                optionElement.textContent = value;
+                selectIdioms.append(optionElement);
+            }
+            document.getElementById('idiomsSelect').value = idioma;
+            document.getElementById('tituloIdioma').innerHTML = "Actualmente estás viendo el mapa en el idioma: " + SUPPORTED_LANGUAGES[idioma];
+        }
+
+        function fillCountriesSelect() {
+            fetch('jsonFiles/countries.json').then((res) => {
+                console.log("country info: " + res.name);
+            });
         }
 
     </script>
