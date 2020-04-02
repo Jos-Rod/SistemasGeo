@@ -65,6 +65,7 @@
         const urlParams = new URLSearchParams(queryString);
         const idioma = urlParams.get('idiomsSelect');
         var countiesInfo;
+        var marker;
 
         // fill select
         var selectIdioms = document.getElementById('idiomsSelect');
@@ -138,6 +139,16 @@
                         lat: countrySelected.latlng[0], // Apple's HQ 
                         lng: countrySelected.latlng[1]
                     };
+            if (marker != null) {
+                marker.setCenter(null);
+            }
+            marker = new google.maps.Marker({
+                position: pos,
+                label: countrySelected.capital,
+                map: mapa
+            });
+            //marker.setPosition( new google.maps.LatLng(countrySelected.latlng[0], countrySelected.latlng[1]));
+            mapa.panTo( new google.maps.LatLng(countrySelected.latlng[0], countrySelected.latlng[1]));
             mapa.setCenter(pos);
 
         }
