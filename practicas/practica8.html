@@ -124,7 +124,9 @@
 
             var textoAMostrar = "";
             textoAMostrar = textoAMostrar + "Nombre Pais: " + countrySelected.name + "<br>Capital: " + countrySelected.capital + "<br>Zonas horarias: "
-            countrySelected.timezones.array.forEach(t => {
+            console.log("Fimezones:");
+            console.log(countrySelected.timezones);
+            countrySelected.timezones.forEach(t => {
                 textoAMostrar = textoAMostrar + t;
             });
             
