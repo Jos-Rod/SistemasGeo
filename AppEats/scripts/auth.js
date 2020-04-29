@@ -92,7 +92,12 @@ function loginGoogle() {
         // var token = result.credential.accessToken;
         // var user = result.user;
 
-        usuarioGlobal = res.user;
+        const usuarioGlobal = res.user;
+
+        db.collection("usuarios").doc(credentials.user.uid).set({
+            nombre: usuarioGlobal.displayName,
+            direccion: usuarioGlobal.photoURL
+        });
 
         $("#modalIngresar").modal("hide");
         formIngresar.reset();

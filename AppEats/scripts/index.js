@@ -2,22 +2,22 @@
 
 const listaToLog = document.querySelectorAll(".toLog");
 const listaLogged = document.querySelectorAll(".logged");
-var usuarioGlobal;
 
 const configurarMenu = (user) => {
     if (user) {
 
         db.collection("usuarios").doc(user.uid).get().then( doc => {
-            if (doc.data().nombre) {
+            console.log("Login: " + doc);
+            if (doc.data()) {
                 $("#menuImg").attr("src","");
                 document.getElementById("menuNombre").innerHTML = doc.data().nombre;
                 document.getElementById("menuTelefono").innerHTML = "Teléfono: " + doc.data().telefono;
                 document.getElementById("menuDireccion").innerHTML = "Dirección: " + doc.data().direccion;
             } else {
-                document.getElementById("menuNombre").innerHTML = usuarioGlobal.displayName
-                document.getElementById("menuTelefono").innerHTML = usuarioGlobal.email;
-                document.getElementById("menuDireccion").innerHTML = '';
-                $("#menuImg").attr("src", usuarioGlobal.photoURL);
+                document.getElementById("menuNombre").innerHTML = doc.data().nombre
+                document.getElementById("menuDireccion").innerHTML = "";
+                document.getElementById("menuTelefono").innerHTML = "";
+                $("#menuImg").attr("src", doc.data().direccion);
             }
         });
 
