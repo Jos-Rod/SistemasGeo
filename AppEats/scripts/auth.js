@@ -89,8 +89,10 @@ function loginGoogle() {
     var provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider).then( function(res) {
-        var token = result.credential.accessToken;
-        var user = result.user;
+        // var token = result.credential.accessToken;
+        // var user = result.user;
+
+        usuarioGlobal = res.user;
 
         $("#modalIngresar").modal("hide");
         formIngresar.reset();

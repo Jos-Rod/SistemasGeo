@@ -2,6 +2,7 @@
 
 const listaToLog = document.querySelectorAll(".toLog");
 const listaLogged = document.querySelectorAll(".logged");
+var usuarioGlobal;
 
 const configurarMenu = (user) => {
     if (user) {
@@ -13,10 +14,10 @@ const configurarMenu = (user) => {
                 document.getElementById("menuTelefono").innerHTML = "Teléfono: " + doc.data().telefono;
                 document.getElementById("menuDireccion").innerHTML = "Dirección: " + doc.data().direccion;
             } else {
-                document.getElementById("menuNombre").innerHTML = res.user.displayName
-                document.getElementById("menuTelefono").innerHTML = res.user.email;
+                document.getElementById("menuNombre").innerHTML = usuarioGlobal.displayName
+                document.getElementById("menuTelefono").innerHTML = usuarioGlobal.email;
                 document.getElementById("menuDireccion").innerHTML = '';
-                $("#menuImg").attr("src",res.user.photoURL);
+                $("#menuImg").attr("src", usuarioGlobal.photoURL);
             }
         });
 
