@@ -92,11 +92,6 @@ function loginGoogle() {
         var token = result.credential.accessToken;
         var user = result.user;
 
-        document.getElementById("menuNombre").innerHTML = res.user.displayName
-        document.getElementById("menuTelefono").innerHTML = res.user.email;
-        document.getElementById("menuDireccion").innerHTML = '';
-        $("#menuImg").attr("src",res.user.photoURL);
-
         $("#modalIngresar").modal("hide");
         formIngresar.reset();
         formIngresar.querySelector(".error").innerHTML = "";

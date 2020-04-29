@@ -12,6 +12,11 @@ const configurarMenu = (user) => {
                 document.getElementById("menuNombre").innerHTML = doc.data().nombre;
                 document.getElementById("menuTelefono").innerHTML = "Teléfono: " + doc.data().telefono;
                 document.getElementById("menuDireccion").innerHTML = "Dirección: " + doc.data().direccion;
+            } else {
+                document.getElementById("menuNombre").innerHTML = res.user.displayName
+                document.getElementById("menuTelefono").innerHTML = res.user.email;
+                document.getElementById("menuDireccion").innerHTML = '';
+                $("#menuImg").attr("src",res.user.photoURL);
             }
         });
 
