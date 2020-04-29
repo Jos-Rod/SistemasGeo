@@ -7,8 +7,8 @@ const configurarMenu = (user) => {
     if (user) {
 
         db.collection("usuarios").doc(user.uid).get().then( doc => {
-            console.log("Login: " + doc);
-            if (doc.data()) {
+            console.log("Login: " + doc.data());
+            if (doc.data().telefono) {
                 $("#menuImg").attr("src","");
                 document.getElementById("menuNombre").innerHTML = doc.data().nombre;
                 document.getElementById("menuTelefono").innerHTML = "Teléfono: " + doc.data().telefono;
