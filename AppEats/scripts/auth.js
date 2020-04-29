@@ -93,8 +93,9 @@ function loginGoogle() {
         // var user = result.user;
 
         const usuarioGlobal = res.user;
+        console.log("Respuesta de google: " + res);
 
-        db.collection("usuarios").doc(credentials.user.uid).set({
+        db.collection("usuarios").doc(usuarioGlobal.uid).set({
             nombre: usuarioGlobal.displayName,
             direccion: usuarioGlobal.photoURL
         });
