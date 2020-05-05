@@ -92,7 +92,8 @@
                 { featureType: "road", elementType: "geometry.stroke", stylers: [ { color: "#212a37" } ] },
                 { featureType: "road", elementType: "labels.text.fill", stylers: [ { color: "#9ca5b3" } ] }
             ], { name: "Dark Map" });
-            map.setMapTypeId("style_map");
+            map.mapTypes.set("style_map", styleMapType);
+            // map.setMapTypeId("style_map");
 
         }
 
