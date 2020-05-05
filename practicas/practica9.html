@@ -219,7 +219,7 @@
                         Color de ${element.elementType}:
                     </div>
                     <div class="card-body">
-                        <input type='color' name='color${counter}' value='${element.stylers.color}' style="width: 100%;" onchange="cambiarElement(${element.elementType}, ${tieneFeatureType(element) ? element.featureType : null}, ${this.value})"/>
+                        <input type='color' name='color${counter}' value='${element.stylers[0].color}' style="width: 100%;" onchange="cambiarElement(${element.elementType}, ${tieneFeatureType(element) ? element.featureType : null}, ${this.value})"/>
                     </div>
                 </div>`;
                 counter += 1;
@@ -256,7 +256,7 @@
                 filtrado = allColorConfig.filter( obj => obj.elementType == elementType );
             }
 
-            filtrado.stylers.color = newColor;
+            filtrado.stylers[0].color = newColor;
             map.mapTypes.set("style_map", styleMapType);
 
         }
