@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Google Maps' styles</title>
+
+    <style>
+        html, body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #map {
+            width: 100%;
+            height: 650px;
+        }
+    </style>
+
+  </head>
+  <body>
+
+
+    <div id="map"></div>
+    
+    <div class="mt-3">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-8">
+                <h4>Pick your colors:</h4>
+                <div class="row">
+                    <div class="col-3">
+                        <p id="prueba">Color de las áreas verdes</p>
+                    </div>
+                    <div class="col-9">
+                        <input type='color' name='color2' value='#3355cc' onchange="cambiarColorParques(this.value)"/>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+      
+    <script>
+
+        var map;
+        var styleMapType;
+
+        function initMap() {
+            styleMapType = new google.maps.StyledMapType([
+                { elementType: "geometry", stylers: [ { color: "#242f3e" } ] },
+                { elementType: "labels.text.stroke", stylers: [ { color: "#242f3e" } ] },
+                { elementType: "labels.text.fill", stylers: [ { color: "#746855" } ] },
+                { featureType: "poi", elementType: "labels.text.fill", stylers: [ { color: "#d59563" } ] },
+                { featureType: "poi.park", elementType: "geometry", stylers: [ { color: "#1b884a" } ] },
+                { featureType: "road", elementType: "geometry.stroke", stylers: [ { color: "#212a37" } ] },
+                { featureType: "road", elementType: "labels.text.fill", stylers: [ { color: "#9ca5b3" } ] }
+            ], { name: "Dark Map" });
+            var properties = {
+                center: { lat: 21.152639, lng: -101.711598 },
+                zoom: 14,
+                mapTypeControlOptions: {
+                    mapTypeIds: [ "roadmap", "satellite", "hybrid", "terrain", "style_map" ]
+                }
+                
+            };
+
+            var mapa = document.getElementById("map");
+
+            map = new google.maps.Map(mapa, properties);
+
+            map.mapTypes.set("style_map", styleMapType);
+            map.setMapTypeId("style_map");
+
+        }
+
+        function cambiarColorParques(parkColor) {
+            document.getElementById("prueba").style.color = parkColor;
+
+            styleMapType = new google.maps.StyledMapType([
+                { elementType: "geometry", stylers: [ { color: "#242f3e" } ] },
+                { elementType: "labels.text.stroke", stylers: [ { color: "#242f3e" } ] },
+                { elementType: "labels.text.fill", stylers: [ { color: "#746855" } ] },
+                { featureType: "poi", elementType: "labels.text.fill", stylers: [ { color: "#d59563" } ] },
+                { featureType: "poi.park", elementType: "geometry", stylers: [ { color: parkColor } ] },
+                { featureType: "road", elementType: "geometry.stroke", stylers: [ { color: "#212a37" } ] },
+                { featureType: "road", elementType: "labels.text.fill", stylers: [ { color: "#9ca5b3" } ] }
+            ], { name: "Dark Map" });
+            map.setMapTypeId("style_map");
+
+        }
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=initMap" async defer></script>
+
+  </body>
+</html>
