@@ -26,24 +26,35 @@
   <body>
 
 
-    <div id="map"></div>
-    
-    <div class="mt-3">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-8">
-                <h4>Pick your colors:</h4>
+    <div class="container">
+        <div class="card shadow mt-4">
+            <div class="card-header">
+              Customized Google Map Color Maker
+            </div>
+            <div class="card-body">
                 <div class="row">
-                    <div class="col-3">
-                        <p id="prueba">Color de las áreas verdes</p>
+                    <div class="col-4">
+                        <h4>Pick your colors:</h4>
+                        <div class="col-9 mt-3">
+                            <div class="overflow-auto" style="height: 620px;" id="listaElementos">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Color de geometry:
+                                    </div>
+                                    <div class="card-body">
+                                        <input type='color' name='color2' value='#3355cc' style="width: 100%;" onchange="cambiarColorParques(this.value)"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <input type='color' name='color2' value='#3355cc' onchange="cambiarColorParques(this.value)"/> -->
+                        </div>
                     </div>
-                    <div class="col-9">
-                        <input type='color' name='color2' value='#3355cc' onchange="cambiarColorParques(this.value)"/>
+                    <div class="col-8">
+                        <div id="map"></div>
                     </div>
                 </div>
             </div>
-            
-        </div>
+          </div>
     </div>
 
       
@@ -175,6 +186,8 @@
                         ]
                     }];
 
+        setAllColorData();
+
         function initMap() {
             styleMapType = new google.maps.StyledMapType(allColorConfig, { name: "Dark Map" });
             var properties = {
@@ -195,6 +208,29 @@
 
         }
 
+        function setAllColorData() {
+            var htmlToAdd;
+            var counter = 1;
+            allColorConfig.forEach( element => {
+
+                htmlToAdd += `
+                <div class="card">
+                    <div class="card-header">
+                        Color de ${element.elementType}:
+                    </div>
+                    <div class="card-body">
+                        <input type='color' name='color${counter}' value='#3355cc' style="width: 100%;" onchange="cambiarElement(${element.elementType}, ${tieneFeatureType(element.featureType) ? element.featureType : null}, ${this.value})"/>
+                    </div>
+                </div>`;
+                counter += 1;
+            });
+            document.getElementById("listaElementos").innerHTML = htmlToAdd;
+        }
+
+        function tieneFeatureType(el) {
+            return ("featureType" in el) ? true : false;
+        }
+
         function cambiarColorParques(parkColor) {
             document.getElementById("prueba").style.color = parkColor;
 
@@ -209,6 +245,19 @@
             ], { name: "Dark Map" });
             map.mapTypes.set("style_map", styleMapType);
             // map.setMapTypeId("style_map");
+
+        }
+
+        function cambiarElement(elementType, featureType, newColor) {
+            var filtrado;
+            if (featureType != null) {
+                filtrado = allColorConfig.filter( obj => obj.elementType == elementType && obj.featureType == featureType );
+            } else {
+                filtrado = allColorConfig.filter( obj => obj.elementType == elementType );
+            }
+
+            filtrado.stylers.color = newColor;
+            map.mapTypes.set("style_map", styleMapType);
 
         }
 
