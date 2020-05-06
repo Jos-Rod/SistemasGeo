@@ -249,15 +249,15 @@
         }
 
         function cambiarElement(elementType, featureType, newColor) {
-            var filtrado;
-            if (featureType != null) {
-                filtrado = allColorConfig.filter( obj => obj.elementType == elementType && obj.featureType == featureType );
-            } else {
-                filtrado = allColorConfig.filter( obj => obj.elementType == elementType );
-            }
+            // var filtrado;
+            // if (featureType != null) {
+            //     filtrado = allColorConfig.filter( obj => obj.elementType == elementType && obj.featureType == featureType );
+            // } else {
+            //     filtrado = allColorConfig.filter( obj => obj.elementType == elementType );
+            // }
 
-            filtrado.stylers[0].color = newColor;
-            styleMapType = new google.maps.StyledMapType( allColorConfig, { name: "Dark Map" });
+            // filtrado.stylers[0].color = newColor;
+            // styleMapType = new google.maps.StyledMapType( allColorConfig, { name: "Dark Map" });
 
             // var newColors = allColorConfig.map( el => {
             //     if (tieneFeatureType(el)) {
@@ -267,6 +267,7 @@
             //             return filtrado;
             //         }
             //     }
+            //     return el;
             // });
 
 
