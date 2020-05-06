@@ -256,7 +256,8 @@
                 filtrado = allColorConfig.filter( obj => obj.elementType == elementType );
             }
 
-            filtrado.stylers[0].color = newColor;
+            console.log(filtrado);
+            filtrado[0].stylers[0].color = newColor;
             styleMapType = new google.maps.StyledMapType( allColorConfig, { name: "Dark Map" });
 
             // var newColors = allColorConfig.map( el => {
