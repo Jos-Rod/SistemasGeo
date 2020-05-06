@@ -54,6 +54,8 @@
                     </div>
                 </div>
             </div>
+
+            <a href="../index.html" class="btn btn-primary d-flex m-4" style="width: 100px; height: 40px; align-items: center;">Ir al Index</a>
           </div>
     </div>
 
@@ -231,22 +233,6 @@
             return ("featureType" in el) ? true : false;
         }
 
-        function cambiarColorParques(parkColor) {
-            document.getElementById("prueba").style.color = parkColor;
-
-            styleMapType = new google.maps.StyledMapType([
-                { elementType: "geometry", stylers: [ { color: "#242f3e" } ] },
-                { elementType: "labels.text.stroke", stylers: [ { color: "#242f3e" } ] },
-                { elementType: "labels.text.fill", stylers: [ { color: "#746855" } ] },
-                { featureType: "poi", elementType: "labels.text.fill", stylers: [ { color: "#d59563" } ] },
-                { featureType: "poi.park", elementType: "geometry", stylers: [ { color: parkColor } ] },
-                { featureType: "road", elementType: "geometry.stroke", stylers: [ { color: "#212a37" } ] },
-                { featureType: "road", elementType: "labels.text.fill", stylers: [ { color: "#9ca5b3" } ] }
-            ], { name: "Dark Map" });
-            map.mapTypes.set("style_map", styleMapType);
-            // map.setMapTypeId("style_map");
-
-        }
 
         function cambiarElement(elementType, featureType, newColor) {
             var filtrado;
@@ -259,19 +245,6 @@
             console.log(filtrado);
             filtrado[0].stylers[0].color = newColor;
             styleMapType = new google.maps.StyledMapType( allColorConfig, { name: "Dark Map" });
-
-            // var newColors = allColorConfig.map( el => {
-            //     if (tieneFeatureType(el)) {
-            //         if (el.elementType == elementType && el.featureType == featureType) {
-            //             return filtrado;
-            //         } else if (el.elementType == elementType) {
-            //             return filtrado;
-            //         }
-            //     }
-            //     return el;
-            // });
-
-
 
             map.mapTypes.set("style_map", styleMapType);
 
