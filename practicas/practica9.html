@@ -36,7 +36,7 @@
                     <div class="col-4">
                         <h4>Pick your colors:</h4>
                         <div class="col-9 mt-3">
-                            <div class="overflow-auto" style="height: 620px;" id="listaElementos">
+                            <div class="overflow-auto" style="height: 620px; width: 330px;" id="listaElementos">
                                 <!-- <div class="card">
                                     <div class="card-header">
                                         Color de geometry:
@@ -214,7 +214,7 @@
             allColorConfig.forEach( element => {
 
                 htmlToAdd += `
-                <div class="card">
+                <div class="card m-4">
                     <div class="card-header">
                         Color de ${element.elementType}:
                     </div>
@@ -256,8 +256,21 @@
                 filtrado = allColorConfig.filter( obj => obj.elementType == elementType );
             }
 
-            filtrado.stylers[0].color = newColor;
-            map.mapTypes.set("style_map", styleMapType);
+            // filtrado.stylers[0].color = newColor;
+
+            // var newColors = allColorConfig.map( el => {
+            //     if (tieneFeatureType(el)) {
+            //         if (el.elementType == elementType && el.featureType == featureType) {
+            //             return filtrado;
+            //         } else if (el.elementType == elementType) {
+            //             return filtrado;
+            //         }
+            //     }
+            // });
+
+
+
+            map.mapTypes.set("style_map", allColorConfig);
 
         }
 
