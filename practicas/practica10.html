@@ -276,7 +276,15 @@
             }
         }
 
+        var markersArray = [];
         function actualizarMarkers(allMarkers) {
+
+            // remove all markers
+            for (var i = 0; i < markersArray.length; i++ ) {
+                markersArray[i].setMap(null);
+            }
+            markersArray = [];
+            
             allMarkers.forEach( userData => {
                 const userReadable = userData.doc.data();
                 const user = {
@@ -288,15 +296,13 @@
                     nombre: userReadable.nombre
                 };
 
-                // remove all markers
-
-
                 // add all markers
-                new google.maps.Marker({
+                var merker = new google.maps.Marker({
                     position: user.location,
                     label: user.nombre,
                     map: map
                 });
+                markersArray.push(merker);
                 
             });
         }
