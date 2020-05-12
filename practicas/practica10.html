@@ -228,7 +228,13 @@
 
             // ver si hay usuario
             if (user) {
-                alPendienteDeUbicaciones();
+
+                db.collection("usuarios").doc(user.uid).get().then( doc => {
+                    const currentUsername = doc.data().nombre;
+                    alPendienteDeUbicaciones(currentUser);
+                });
+
+                
                 if (navigator.geolocation) {
                 console.log("No Bloqueao");
 
@@ -255,19 +261,19 @@
 
         }
 
-        function alPendienteDeUbicaciones() {
+        function alPendienteDeUbicaciones(currentUsername) {
             if (navigator.geolocation) {
                 // watch for firebase location
                 db.collection('usuarios').onSnapshot( (snap) => {
                     let changes = snap.docChanges();
-                    actualizarMarkers(changes);
+                    actualizarMarkers(changes, currentUsername);
                 });
                 
             }
         }
 
         var markersArray = [];
-        function actualizarMarkers(allMarkers) {
+        function actualizarMarkers(allMarkers, currentUsername) {
 
             // remove all markers
             for (var i = 0; i < markersArray.length; i++ ) {
@@ -288,7 +294,12 @@
 
                 var informacion = new google.maps.InfoWindow;
                 informacion.setPosition(user.location);
-                informacion.setContent(user.nombre);
+                if (currentUser == user.nombre) {
+                    informacion.setContent("<strong>YO</strong><br>" + user.horaActualizacion);
+                } else {
+                    informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
+                }
+                
                 informacion.open(map);
 
                 markersArray.push(informacion);
