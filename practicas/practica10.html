@@ -238,6 +238,8 @@
                         lng: position.coords.longitude
                     };
 
+                    map.setCenter(pos);
+
                     // update firebase location
                     db.collection("usuarios").doc(user.uid).update({
                         horaActualizacion: new Date().getTime() / 1000,
@@ -259,18 +261,6 @@
                 db.collection('usuarios').onSnapshot( (snap) => {
                     let changes = snap.docChanges();
                     actualizarMarkers(changes);
-                    // changes.forEach( change => {
-                    //     console.log("ASDDF: ");
-                    //     console.log(change.doc.data());
-                        // if (change.type == "added") {
-                        //     // update marker
-                        //     let location = change.doc.data().watcherLocation;
-                        //     updateMarkerLocation(location.latitude, location.longitude, marker);
-                        // } else if (change.type == "modified") {
-                        //     // update marker
-                        //     updateMarkerLocation(location.latitude, location.longitude, marker);
-                        // }
-                    // });
                 });
                 
             }
@@ -281,7 +271,7 @@
 
             // remove all markers
             for (var i = 0; i < markersArray.length; i++ ) {
-                markersArray[i].setMap(null);
+                markersArray[i].close();
             }
             markersArray = [];
             
@@ -296,13 +286,20 @@
                     nombre: userReadable.nombre
                 };
 
+                var informacion = new google.maps.InfoWindow;
+                informacion.setPosition(user.location);
+                informacion.setContent(user.nombre);
+                informacion.open(map);
+
+                markersArray.push(informacion);
+
                 // add all markers
-                var merker = new google.maps.Marker({
-                    position: user.location,
-                    label: user.nombre,
-                    map: map
-                });
-                markersArray.push(merker);
+                // var merker = new google.maps.Marker({
+                //     position: user.location,
+                //     label: user.nombre,
+                //     map: map
+                // });
+                // markersArray.push(merker);
                 
             });
         }
