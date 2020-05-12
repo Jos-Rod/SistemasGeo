@@ -199,7 +199,7 @@
 
     <script>
 
-        // alPendienteDeUbicaciones();
+        // actualizarUbicacionDeUsuario();
         var map;
         const auth = firebase.auth();
         
@@ -215,47 +215,53 @@
                 };
 
                 map = new google.maps.Map(document.getElementById("map"), properties);
-                actualizarUbicacionDeUsuario();
 
                 window.addEventListener('locationchange', function(){
                     console.log('location changed!');
-                    actualizarUbicacionDeUsuario();
                 })
                 });
                 
             }
         }
 
-        function actualizarUbicacionDeUsuario() {
-            
-            navigator.geolocation.getCurrentPosition( position => {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                console.log("Mandar actualizacion de ubicacion");
-                console.log(pos);
+        function actualizarUbicacionDeUsuario(user) {
 
+            // ver si hay usuario
+            if (user) {
+                alPendienteDeUbicaciones();
+                if (navigator.geolocation) {
+                console.log("No Bloqueao");
 
+                navigator.geolocation.getCurrentPosition( position => {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
 
-                // update firebase location
-                // db.collection("amigos").doc("8doxuwKkpW63Dh07hRHj").update({
-                //     watcherLocation: new firebase.firestore.GeoPoint(pos.lat, pos.lng)
-                // });
+                    // update firebase location
+                    db.collection("usuarios").doc(user.uid).update({
+                        horaActualizacion: new Date().getTime() / 1000,
+                        location: new firebase.firestore.GeoPoint(pos.lat, pos.lng)
+                    });
 
-            });
+                });
+
+            } else {
+                console.log("Bloqueao");
+            }
+            }            
 
         }
 
         function alPendienteDeUbicaciones() {
             if (navigator.geolocation) {
                 // watch for firebase location
-                db.collection('amigos').onSnapshot( (snap) => {
+                db.collection('usuarios').onSnapshot( (snap) => {
                     let changes = snap.docChanges();
                     actualizarMarkers(changes);
-                    changes.forEach( change => {
-                        // console.log("ASDDF: ");
-                        // console.log(change.doc.data());
+                    // changes.forEach( change => {
+                    //     console.log("ASDDF: ");
+                    //     console.log(change.doc.data());
                         // if (change.type == "added") {
                         //     // update marker
                         //     let location = change.doc.data().watcherLocation;
@@ -264,7 +270,7 @@
                         //     // update marker
                         //     updateMarkerLocation(location.latitude, location.longitude, marker);
                         // }
-                    });
+                    // });
                 });
                 
             }
@@ -274,11 +280,23 @@
             allMarkers.forEach( userData => {
                 const userReadable = userData.doc.data();
                 const user = {
-                    lat: userReadable.location.latitude,
-                    lng: userReadable.location.longitude
+                    location: {
+                        lat: userReadable.location.latitude,
+                        lng: userReadable.location.longitude
+                    },
+                    horaActualizacion: convert(userReadable.horaActualizacion),
+                    nombre: userReadable.nombre
                 };
-                const lat = userReadable.horaActualizacion;
-                console.log(convert(lat.seconds));
+
+                // remove all markers
+
+
+                // add all markers
+                new google.maps.Marker({
+                    position: user.location,
+                    label: user.nombre,
+                    map: map
+                });
                 
             });
         }

@@ -1,6 +1,7 @@
 
 auth.onAuthStateChanged( user => {
     configurarMenu(user);
+    actualizarUbicacionDeUsuario(user);
 });
 
 const formIngresar = document.getElementById("formIngresar");
