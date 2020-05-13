@@ -295,7 +295,7 @@
                 var informacion = new google.maps.InfoWindow;
                 informacion.setPosition(user.location);
                 if (currentUsername == user.nombre) {
-                    informacion.setContent("<strong>YO</strong><br>" + user.horaActualizacion);
+                    informacion.setContent("YO<br>" + user.horaActualizacion);
                 } else {
                     informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
                 }
