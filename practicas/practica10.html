@@ -11,6 +11,7 @@
     <style>
         #map {
             height: 100%;
+            width: 400px;
         }
         html, body {
             height: 100%;
@@ -191,7 +192,7 @@
         <div class="row">
             <div class="3"> </div>
             <div class="8">
-                <div id="map" style="display: none; width: 100%;"></div>
+                <div id="map" style="display: none;"></div>
             </div>
             <div class="3"> </div>
         </div>
@@ -302,7 +303,7 @@
 
                 var informacion = new google.maps.InfoWindow();
                 informacion.setPosition(user.location);
-                informacion.setContent(user.nombre + "a<br>" + user.horaActualizacion);
+                informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
                 // if (currentUsername == user.nombre) {
                 //     informacion.setContent("YO<br>" + user.horaActualizacion);
                 // } else {
