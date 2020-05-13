@@ -292,7 +292,7 @@
                     nombre: userReadable.nombre
                 };
 
-                var informacion = new google.maps.InfoWindow;
+                informacion = new google.maps.InfoWindow;
                 informacion.setPosition(user.location);
                 if (currentUsername == user.nombre) {
                     informacion.setContent("YO<br>" + user.horaActualizacion);
