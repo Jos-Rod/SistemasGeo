@@ -274,7 +274,7 @@
 
         var markersArray = [];
         function actualizarMarkers(allMarkers, currentUsername) {
-
+            
             // remove all markers
             for (var i = 0; i < markersArray.length; i++ ) {
                 markersArray[i].close();
@@ -293,14 +293,15 @@
                 };
                 
 
-                var informacion = new google.maps.InfoWindow();
+                
+                var infoDisplay = "";
+                if (currentUsername == user.nombre) {
+                    infoDisplay = "YO<br>" + user.horaActualizacion;
+                } else {
+                    infoDisplay = user.nombre + "<br>" + user.horaActualizacion;
+                }
+                var informacion = new google.maps.InfoWindow({content: infoDisplay});
                 informacion.setPosition(user.location);
-                informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
-                // if (currentUsername == user.nombre) {
-                //     informacion.setContent("YO<br>" + user.horaActualizacion);
-                // } else {
-                //     informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
-                // }
                 
                 informacion.open(map);
 
