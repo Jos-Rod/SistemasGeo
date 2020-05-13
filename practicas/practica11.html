@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Watch position</title>
+
+    <style>
+        html, body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #map {
+            width: 100%;
+            height: 350px;
+        }
+    </style>
+
+  </head>
+  <body>
+
+
+    <div class="container">
+        <div class="card shadow mt-4">
+            <div class="card-header">
+              Watcher position
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 d-flex m-4" style="justify-content: space-around;">    
+                        <button class="btn btn-success" id="botonWatch">Watch</button>
+                        <button class="btn btn-warning" id="botonDetener">Stop Watching</button>
+                    </div>
+                    <div class="col-12">
+                        <div id="map"></div>
+                    </div>
+                    <div class="col-12">
+                        <h5 id="datos">Datos:</h5>
+                    </div>
+                </div>
+            </div>
+
+            <a href="../index.html" class="btn btn-primary d-flex m-4" style="width: 100px; height: 40px; align-items: center;">Ir al Index</a>
+          </div>
+    </div>
+
+      
+    <script>
+
+        var map;
+        var styleMapType;
+
+        function initMap() {
+            
+            var properties = {
+                center: { lat: 21.152639, lng: -101.711598 },
+                zoom: 14
+                
+            };
+
+            var mapa = document.getElementById("map");
+
+            map = new google.maps.Map(mapa, properties);
+
+            var icono = { 
+                url: "https://giphy.com/stickers/nowthis-news-location-nowthisnews-S6et3lt2QwpyPNAncH",
+                scaledSize: new google.maps.Size(30, 30),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(0,0)
+            };
+
+            var marker = new google.maps.Marker({
+                position: properties.center,
+                icon: icono,
+                map: map
+            });
+
+            var watchId = null;
+
+            const boton = document.getElementById("botonWatch");
+
+            var positionOptions = {
+                enableHighAccuarcy: true,
+                timeout: 10 * 1000,
+                maximumAge: 20 * 1000
+            }
+
+            if (navigator.geolocation) {
+                boton.addEventListener("click", function () {
+                    watchId = navigator.geolocation.watchPosition(function (position) {
+                        var lat = position.coords.latitude;
+                        var lon = position.coords.longitude;
+
+                        var coordinates = lat + ", " + lon;
+
+                        const html = `
+                            <p>Coordenadas ${coordinates}</p>
+                        `;
+
+                        const datos = document.getElementById("datos");
+                        datos.innerHTML = html;
+
+                        marker.setPosition( new google.maps.LatLng(lat, lon));
+                        map.panTo( new google.maps.LatLng(lat, lng) );
+
+                    }, function (error) { errorWatch(error) }, positionOptions);
+                });
+            }
+
+        }
+
+        function errorWatch(error) {
+            console.log(error);
+        }
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=initMap" async defer></script>
+
+  </body>
+</html>
