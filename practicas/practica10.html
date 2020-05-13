@@ -276,10 +276,10 @@
         function actualizarMarkers(allMarkers, currentUsername) {
             
             // remove all markers
-            for (var i = 0; i < markersArray.length; i++ ) {
-                markersArray[i].close();
-            }
-            markersArray = [];
+            // for (var i = 0; i < markersArray.length; i++ ) {
+            //     markersArray[i].close();
+            // }
+            // markersArray = [];
             
             allMarkers.forEach( userData => {
                 const userReadable = userData.doc.data();
@@ -293,9 +293,9 @@
                 };
                 
 
-                var informacion = new google.maps.InfoWindow({content: user.nombre, position: user.location});
-                // informacion.setPosition(user.location);
-                // informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
+                var informacion = new google.maps.InfoWindow();
+                informacion.setPosition(user.location);
+                informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
                 // if (currentUsername == user.nombre) {
                 //     informacion.setContent("YO<br>" + user.horaActualizacion);
                 // } else {
