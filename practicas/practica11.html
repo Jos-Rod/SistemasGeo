@@ -86,7 +86,7 @@
             const boton = document.getElementById("botonWatch");
 
             var positionOptions = {
-                enableHighAccuarcy: true,
+                enableHighAccuracy: true,
                 timeout: 10 * 1000,
                 maximumAge: 20 * 1000
             }
@@ -109,7 +109,7 @@
                         marker.setPosition( new google.maps.LatLng(lat, lon));
                         map.panTo( new google.maps.LatLng(lat, lon) );
 
-                    }, function (error) { errorWatch(error) }, positionOptions);
+                    }, errorWatch, positionOptions);
                 });
             }
 
