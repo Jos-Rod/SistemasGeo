@@ -291,18 +291,20 @@
                     horaActualizacion: convert(userReadable.horaActualizacion),
                     nombre: userReadable.nombre
                 };
+                
 
-                informacion = new google.maps.InfoWindow();
+                var informacion = new google.maps.InfoWindow();
                 informacion.setPosition(user.location);
-                if (currentUsername == user.nombre) {
-                    informacion.setContent("YO<br>" + user.horaActualizacion);
-                } else {
-                    informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
-                }
+                informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
+                // if (currentUsername == user.nombre) {
+                //     informacion.setContent("YO<br>" + user.horaActualizacion);
+                // } else {
+                //     informacion.setContent(user.nombre + "<br>" + user.horaActualizacion);
+                // }
                 
                 informacion.open(map);
 
-                markersArray.push(informacion);
+                // markersArray.push(informacion);
 
                 // add all markers
                 // var merker = new google.maps.Marker({
