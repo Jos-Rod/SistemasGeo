@@ -70,7 +70,7 @@
 
             var icono = { 
                 url: "https://media.giphy.com/media/S6et3lt2QwpyPNAncH/giphy.gif",
-                scaledSize: new google.maps.Size(80, 80),
+                scaledSize: new google.maps.Size(200, 200),
                 origin: new google.maps.Point(0,0),
                 anchor: new google.maps.Point(0,0)
             };
@@ -121,6 +121,10 @@
                 botonDetener.addEventListener("click", function() {
                     if (watchId !== null) {
                         navigator.geolocation.clearWatch(watchId);
+
+                        const datos = document.getElementById("datos");
+                        datos.innerHTML = "<h3>Se ha detenido el watcher</h3>";
+
                     }
                 });
 
