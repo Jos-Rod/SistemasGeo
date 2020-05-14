@@ -41,7 +41,7 @@
                         <div id="map"></div>
                     </div>
                     <div class="col-sm-12 col-lg-4">
-                        <h5 id="datos">Datos:</h5>
+                        <h5 id="datos" class="m-2">Datos:</h5>
                     </div>
                 </div>
             </div>
@@ -105,11 +105,12 @@
                         var fechaYHora = (new Date(position.timestamp)).toString();
 
                         const html = `
-                            <p>Coordenadas: ${coordinates}</p>
-                            <p>Exactitud: ${exactitud}</p>
-                            <p>Altitud: ${altitud}</p>
-                            <p>Velocidad: ${speed}</p>
-                            <p>Fecha y hora: ${convert(position.timestamp)}</p>
+                            <h5 class="m-2">Datos:</h5>
+                            <p class="m-2"><strong>Coordenadas:</strong> ${coordinates}</p>
+                            <p class="m-2"><strong>Exactitud:</strong> ${exactitud}</p>
+                            <p class="m-2"><strong>Altitud:</strong> ${altitud}</p>
+                            <p class="m-2"><strong>Velocidad:</strong> ${speed}</p>
+                            <p class="m-2"><strong>Fecha y hora:</strong> ${convert(position.timestamp)}</p>
                         `;
 
                         const datos = document.getElementById("datos");
