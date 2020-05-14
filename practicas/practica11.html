@@ -99,13 +99,17 @@
 
                         var coordinates = lat + ", " + lon;
                         console.log(position);
-                        // var exactitud = (position.coords.accuracy) ? position.coords.accuracy : "No disponible";
-                        // var altitud = (position.coords.altitude) ? position.coords.altitude : "No disponible";
-                        // var speed = (position.coords.speed) ? position.coords.speed : "No disponible";
-                        // var fechaYHora = (new Date(position.timestamp)).toString();
+                        var exactitud = (position.coords.accuracy) ? position.coords.accuracy : "No disponible";
+                        var altitud = (position.coords.altitude) ? position.coords.altitude : "No disponible";
+                        var speed = (position.coords.speed) ? position.coords.speed : "No disponible";
+                        var fechaYHora = (new Date(position.timestamp)).toString();
 
                         const html = `
                             <p>Coordenadas ${coordinates}</p>
+                            <p>Coordenadas ${exactitud}</p>
+                            <p>Coordenadas ${altitud}</p>
+                            <p>Coordenadas ${speed}</p>
+                            <p>Coordenadas ${fechaYHora}</p>
                         `;
 
                         const datos = document.getElementById("datos");
