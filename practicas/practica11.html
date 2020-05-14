@@ -37,10 +37,10 @@
                         <button class="btn btn-success" id="botonWatch">Watch</button>
                         <button class="btn btn-warning" id="botonDetener">Stop Watching</button>
                     </div>
-                    <div class="col-12">
+                    <div class="col-sm-12 col-lg-8">
                         <div id="map"></div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-sm-12 col-lg-4">
                         <h5 id="datos">Datos:</h5>
                     </div>
                 </div>
@@ -105,11 +105,11 @@
                         var fechaYHora = (new Date(position.timestamp)).toString();
 
                         const html = `
-                            <p>Coordenadas ${coordinates}</p>
-                            <p>Coordenadas ${exactitud}</p>
-                            <p>Coordenadas ${altitud}</p>
-                            <p>Coordenadas ${speed}</p>
-                            <p>Coordenadas ${fechaYHora}</p>
+                            <p>Coordenadas: ${coordinates}</p>
+                            <p>Exactitud: ${exactitud}</p>
+                            <p>Altitud: ${altitud}</p>
+                            <p>Velocidad: ${speed}</p>
+                            <p>Fecha y hora: ${convert(position.timestamp)}</p>
                         `;
 
                         const datos = document.getElementById("datos");
