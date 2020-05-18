@@ -53,6 +53,12 @@
                             <h4 class="mt-2" style="text-align: center;">Mapa Control Position</h4>
                             <div id="map5" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
+
+                        <!-- Mapa Restricting Bounds -->
+                        <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
+                            <h4 class="mt-2" style="text-align: center;">Mapa Restricting Bounds</h4>
+                            <div id="map6" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,9 +113,35 @@
                 mayTypeControlOptions: {
                     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
                     position: google.maps.ControlPosition.TOP_CENTER
-                }
+                },
+                zoomControl: true,
+                zoomControlOptions: {
+                    position: google.maps.ControlPosition.LEFT_CENTER
+                },
+                scaleControl: true,
+                streetViewControlOptions: {
+                    position: google.maps.ControlPosition.LEFT_TOP
+                },
+                fullScreenOption: true
             };
             applyPropertiesToMap(properties_5, "5");
+
+
+            var limits = {
+                north: 21.200543,
+                south: 20.938044,
+                west: -101.844470,
+                east: -101.290432
+            }
+            var properties_6 = {
+                center: coordinates,
+                zoom: 14,
+                restriction: {
+                    latLngBounds: limits,
+                    strictBounds: false
+                }
+            };
+            applyPropertiesToMap(properties_6, "6");
 
         }
 
