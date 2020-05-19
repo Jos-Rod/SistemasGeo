@@ -129,12 +129,11 @@
                 listMarkers.push(marker);
                 // pan to the marker
                 mapa4.panTo(x.latLng);
-                console.log(x.latLng);
                 // refresh the select
                 var htmlToSelect = "";
                 listMarkers.forEach(m => {
                     htmlToSelect += `
-                    <option value="${listMarkers.length + 1}">${x.latLng.lat} ${x.latLng.lng}</option>
+                    <option value="${listMarkers.length + 1}">${x.latLng.lat()} ${x.latLng.lng()}</option>
                     `;
                 });
                 document.getElementById("pins").innerHTML = htmlToSelect;
