@@ -131,11 +131,12 @@
                 mapa4.panTo(x.latLng);
                 // refresh the select
                 var htmlToSelect = "";
-                var index = -1;
+                var index = 0;
                 listMarkers.forEach(m => {
                     htmlToSelect += `
-                    <option value="${index + 1}">${x.latLng.lat()} ${x.latLng.lng()}</option>
+                    <option value="${index}">${x.latLng.lat()} ${x.latLng.lng()}</option>
                     `;
+                    index += 1;
                 });
                 document.getElementById("pins").innerHTML = htmlToSelect;
             });
