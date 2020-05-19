@@ -30,15 +30,15 @@
                             <div id="map1" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
 
-                        <!-- Mapa sin controles de ui -->
+                        <!-- Centrar mapa después de 5 segundos -->
                         <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
-                            <h4 class="mt-2" style="text-align: center;">Mapa sin controles de UI</h4>
+                            <h4 class="mt-2" style="text-align: center;">Mapa centrado cada 5 segundos</h4>
                             <div id="map2" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
 
-                        <!-- Mapa sin zoom -->
+                        <!-- Cambiando el zoom -->
                         <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
-                            <h4 class="mt-2" style="text-align: center;">Mapa sin controles de Zoom</h4>
+                            <h4 class="mt-2" style="text-align: center;" id="zoomMapa3">Zoom del mapa: 14</h4>
                             <div id="map3" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
 
@@ -46,6 +46,11 @@
                         <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
                             <h4 class="mt-2" style="text-align: center;">Mapa Control Options</h4>
                             <div id="map4" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
+                            <div class="form-group">
+                                <label for="pins">Ver el pin:</label>
+                                <select class="form-control" id="pins">
+                                </select>
+                              </div>
                         </div>
 
                         <!-- Mapa control position -->
@@ -108,6 +113,35 @@
 
             // MAPA 3
             var mapa3 = getMap(3);
+            mapa3.addListener("zoom_changed", () => {
+                document.getElementById("zoomMapa3").innerHTML = `Zoom del mapa: ${mapa3.getZoom()}`;
+            });
+
+            // MAPA 4
+            var mapa4 = getMap(4);
+            var listMarkers = [];
+            mapa4.addListener("click", (x) => {
+                var marker = new google.maps.Marker({
+                    position: x.latLng,
+                    map: mapa4
+                });
+                // add the marker to the array
+                listMarkers.push(marker);
+                // pan to the marker
+                mapa4.panTo(x.latLng);
+                // refresh the select
+                var htmlToSelect = "";
+                listMarkers.forEach(m => {
+                    htmlToSelect += `
+                    <option value="${listMarkers.length + 1}">${x.latLng.lat} ${x.latLng.lng}</option>
+                    `;
+                });
+                document.getElementById("pins").innerHTML = htmlToSelect;
+            });
+            document.getElementById("pins").addEventListener("change", () => {
+                const markerIndex = document.getElementById("pins").value;
+                mapa4.panTo(listMarkers[markerIndex].position);
+            });
 
         }
 
