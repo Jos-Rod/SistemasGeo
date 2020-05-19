@@ -73,79 +73,23 @@
             
             var coordinates = { lat: 21.152639, lng: -101.711598 };
 
-            var properties_1 = {
+            var properties = {
                 center: coordinates,
                 zoom: 14
                 
             };
-            applyPropertiesToMap(properties_1, "1");
+            var mapa1 = new google.maps.Map(document.getElementById("map1"), properties);
+            
+            var marker = new google.maps.Marker({
+                position: coordinates,
+                map: mapa1
+            });
 
-            var properties_2 = {
-                center: coordinates,
-                zoom: 14,
-                disableDefaultUI: true
-            };
-            applyPropertiesToMap(properties_2, "2");
+            marker.addListener("click", () => {
+                mapa1.setZoom(8);
+                mapa1.setCenter(marker.getPosition());
+            });
 
-            var properties_3 = {
-                center: coordinates,
-                zoom: 14,
-                zoomControl: false,
-                scaleControl: false
-            };
-            applyPropertiesToMap(properties_3, "3");
-
-            var properties_4 = {
-                center: coordinates,
-                zoom: 14,
-                mapTypeControl: true,
-                mayTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                    mapTypeIds: [ 'roadmap', 'satellite', 'terrain' ]
-                }
-            };
-            applyPropertiesToMap(properties_4, "4");
-
-            var properties_5 = {
-                center: coordinates,
-                zoom: 14,
-                mapTypeControl: true,
-                mayTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                    position: google.maps.ControlPosition.BOTTOM_RIGHT
-                },
-                zoomControl: true,
-                zoomControlOptions: {
-                    position: google.maps.ControlPosition.LEFT_CENTER
-                },
-                scaleControl: true,
-                streetViewControlOptions: {
-                    position: google.maps.ControlPosition.LEFT_TOP
-                },
-                fullScreenOption: true
-            };
-            applyPropertiesToMap(properties_5, "5");
-
-            var limits = {
-                north: 21.200543,
-                south: 20.938044,
-                west: -101.844470,
-                east: -101.290432
-            }
-            var properties_6 = {
-                center: coordinates,
-                zoom: 14,
-                restriction: {
-                    latLngBounds: limits,
-                    strictBounds: false
-                }
-            };
-            applyPropertiesToMap(properties_6, "6");
-
-        }
-
-        function applyPropertiesToMap(properties, mapNumber) {
-            var mapAux = new google.maps.Map(document.getElementById(`map${mapNumber}`), properties);
         }
 
     </script>
