@@ -24,9 +24,9 @@
                     </div>
             
                     <div class="row m-3 d-flex" style="justify-content: space-around;">
-                        <!-- Mapa normal -->
+                        <!-- Centrar a en marcador con zoom al dar click en el marcador -->
                         <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
-                            <h4 class="mt-2" style="text-align: center;">Mapa normal</h4>
+                            <h4 class="mt-2" style="text-align: center;">Centrar con click al marcador</h4>
                             <div id="map1" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
 
@@ -78,7 +78,8 @@
                 zoom: 14
                 
             };
-            var mapa1 = new google.maps.Map(document.getElementById("map1"), properties);
+
+            var mapa1 = getMap(1);
             
             var marker = new google.maps.Marker({
                 position: coordinates,
@@ -86,10 +87,34 @@
             });
 
             marker.addListener("click", () => {
-                mapa1.setZoom(8);
+                mapa1.setZoom(13);
                 mapa1.setCenter(marker.getPosition());
             });
 
+
+            // MAPA 2
+            var mapa2 = getMap(2);
+
+            var marker2 = new google.maps.Marker({
+                position: coordinates,
+                map: mapa2
+            });
+
+            mapa2.addListener("center_changed", () => {
+                window.setTimeout(() => {
+                    mapa2.panTo(marker2.getPosition());
+                }, 5000)
+            });
+
+
+            // MAPA 3
+            var mapa3 = getMap(3);
+
+        }
+
+
+        function getMap(number) {
+            return new google.maps.Map(document.getElementById(`map${number}`), properties);
         }
 
     </script>
