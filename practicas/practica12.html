@@ -76,7 +76,6 @@
             var properties = {
                 center: coordinates,
                 zoom: 14
-                
             };
 
             var mapa1 = getMap(1);
@@ -114,6 +113,11 @@
 
 
         function getMap(number) {
+            var coordinates = { lat: 21.152639, lng: -101.711598 };
+            var properties = {
+                center: coordinates,
+                zoom: 14
+            };
             return new google.maps.Map(document.getElementById(`map${number}`), properties);
         }
 
