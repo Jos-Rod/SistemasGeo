@@ -42,9 +42,9 @@
                             <div id="map3" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
 
-                        <!-- Mapa control options -->
+                        <!-- Historial de pines -->
                         <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
-                            <h4 class="mt-2" style="text-align: center;">Mapa Control Options</h4>
+                            <h4 class="mt-2" style="text-align: center;">Historial de marcadores</h4>
                             <div id="map4" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                             <div class="form-group">
                                 <label for="pins">Ver el pin:</label>
@@ -53,10 +53,11 @@
                               </div>
                         </div>
 
-                        <!-- Mapa control position -->
+                        <!-- Lat y lon al click -->
                         <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
-                            <h4 class="mt-2" style="text-align: center;">Mapa Control Position</h4>
+                            <h4 class="mt-2" style="text-align: center;">Click para saber coordenadas</h4>
                             <div id="map5" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
+                            <h5 id="coordenadasMapa5" style="text-align: center;"></h5>
                         </div>
 
                         <!-- Mapa Restricting Bounds -->
@@ -143,6 +144,18 @@
             document.getElementById("pins").addEventListener("change", () => {
                 const markerIndex = document.getElementById("pins").value;
                 mapa4.panTo(listMarkers[markerIndex].position);
+            });
+
+            // MAPA 5
+            var mapa5 = getMap(5);
+            var marker5 = new google.maps.InfoWindow({
+                    content: "Clickea en el mapa!",
+                    map: mapa5
+                });
+            mapa5.addListener("click", (x) => {
+                marker5.setContent("Clickeado aquí");
+                marker5.setPosition(x.latLng);
+                document.getElementById("coordenadasMapa5").innerHTML = `Lat: ${x.latLng.lat()} Lng:${x.latLng.lng()}`;
             });
 
         }
