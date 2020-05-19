@@ -57,13 +57,14 @@
                         <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
                             <h4 class="mt-2" style="text-align: center;">Click para saber coordenadas</h4>
                             <div id="map5" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
-                            <h5 id="coordenadasMapa5" style="text-align: center;"></h5>
+                            <h5 id="coordenadasMapa5" class="mb-2" style="text-align: center;"></h5>
                         </div>
 
                         <!-- Mapa Restricting Bounds -->
-                        <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
+                        <div class="col-5 m-2 d-flex" style="border-radius: 10px; background-color: aquamarine; justify-content: center;">
                             <h4 class="mt-2" style="text-align: center;">Mapa Restricting Bounds</h4>
                             <div id="map6" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
+                            <button class="btn btn-success" id="btnCentrar">Center</button>
                         </div>
                     </div>
                 </div>
@@ -156,6 +157,13 @@
                 marker5.setContent("Clickeado aquí");
                 marker5.setPosition(x.latLng);
                 document.getElementById("coordenadasMapa5").innerHTML = `Lat: ${x.latLng.lat()} Lng:${x.latLng.lng()}`;
+            });
+
+
+            // MAPA 6
+            var mapa6 = getMap(6);
+            google.maps.event.addDomListener(document.getElementById("btnCentrar"), "click", () => {
+                mapa6.panTo(coordinates);
             });
 
         }
