@@ -22,28 +22,39 @@
                     <div>
                         <h2 class="ml-3 mt-2">Controles de mapa:</h2>
                     </div>
+                    <div class="form-group">
+                        <label for="maps">Ver el pin:</label>
+                        <select class="form-control" id="maps">
+                            <option value="1">Centrar con click al marcador</option>
+                            <option value="2">Centrar cada 5 segundos</option>
+                            <option value="3">Mostrar el zoom</option>
+                            <option value="4">Historial de clicks </option>
+                            <option value="5">Conocer coordenadas</option>
+                            <option value="6">Centrar con click externo</option>
+                        </select>
+                      </div>
             
                     <div class="row m-3 d-flex" style="justify-content: space-around;">
                         <!-- Centrar a en marcador con zoom al dar click en el marcador -->
-                        <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
+                        <div id="divMap1" class="col-12 m-2 none" style="border-radius: 10px; background-color: aquamarine;">
                             <h4 class="mt-2" style="text-align: center;">Centrar con click al marcador</h4>
                             <div id="map1" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
 
                         <!-- Centrar mapa después de 5 segundos -->
-                        <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
+                        <div id="divMap2" class="col-12 m-2 none" style="border-radius: 10px; background-color: aquamarine;">
                             <h4 class="mt-2" style="text-align: center;">Mapa centrado cada 5 segundos</h4>
                             <div id="map2" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
 
                         <!-- Cambiando el zoom -->
-                        <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
+                        <div id="divMap3" class="col-12 m-2 none" style="border-radius: 10px; background-color: aquamarine;">
                             <h4 class="mt-2" style="text-align: center;" id="zoomMapa3">Zoom del mapa: 14</h4>
                             <div id="map3" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                         </div>
 
                         <!-- Historial de pines -->
-                        <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
+                        <div id="divMap4" class="col-12 m-2 none" style="border-radius: 10px; background-color: aquamarine;">
                             <h4 class="mt-2" style="text-align: center;">Historial de marcadores</h4>
                             <div id="map4" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                             <div class="form-group">
@@ -54,17 +65,19 @@
                         </div>
 
                         <!-- Lat y lon al click -->
-                        <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
+                        <div id="divMap5" class="col-12 m-2 none" style="border-radius: 10px; background-color: aquamarine;">
                             <h4 class="mt-2" style="text-align: center;">Click para saber coordenadas</h4>
                             <div id="map5" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
                             <h5 id="coordenadasMapa5" class="mb-2" style="text-align: center;"></h5>
                         </div>
 
-                        <!-- Mapa Restricting Bounds -->
-                        <div class="col-5 m-2" style="border-radius: 10px; background-color: aquamarine;">
-                            <h4 class="mt-2" style="text-align: center;">Mapa Restricting Bounds</h4>
+                        <!-- Centrar el mapa con accion externa -->
+                        <div id="divMap6" class="col-12 m-2 none" style="border-radius: 10px; background-color: aquamarine;">
+                            <h4 class="mt-2" style="text-align: center;">Centrar con botón externo al mapa</h4>
                             <div id="map6" class="mb-3" style="width: 100%; height: 300px; border-radius: 10px;"></div>
-                            <button class="btn btn-success" id="btnCentrar">Center</button>
+                            <div class="d-flex mb-3" style="justify-content: center;">
+                                <button class="btn btn-success" id="btnCentrar">Center</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,6 +88,14 @@
 
 
     <script>
+
+        document.getElementById("maps").addEventListener("change", () => {
+            for (var i = 1; i < 7; i++) {
+                document.getElementById(`divMap${i}`).style.display = "none";
+            }
+            const selectedIndex = document.getElementById("maps").value;
+            document.getElementById(`divMap${selectedIndex}`).style.display = "block";
+        });
 
         function initMap() {
             
