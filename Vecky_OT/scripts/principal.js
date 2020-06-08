@@ -40,7 +40,7 @@ function obtenerProductos() {
                 <h5>${prod.nombre}</h5>
                 <p class="mt-2">${prod.descripcion}</p>
                 <p style="text-align: right;">Existencias: ${prod.existencias}</p>
-                <button class="btn btn-info" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="agregarProducto('${d.id}', '${prod.nombre}')">Agregar a OT</button>
+                <button class="btn btn-info" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="agregarProductoAOT('${d.id}', '${prod.nombre}')">Agregar a OT</button>
             </div>
             `;
             
@@ -49,7 +49,7 @@ function obtenerProductos() {
     });
 }
 
-async function agregarProducto(id, nombre) {
+async function agregarProductoAOT(id, nombre) {
 
     const {value: cantidad} = await Swal.fire({
         title: 'Existencias a OT',
@@ -58,6 +58,11 @@ async function agregarProducto(id, nombre) {
         inputPlaceholder: '0'
     });
     
+    actualizarCantidadPedido(id, cantidad);
+
+}
+
+function actualizarCantidadPedido(id, cantidad) {
     db.collection("veckyProductos").doc(id).update({
         pedido: cantidad
     })
@@ -68,7 +73,6 @@ async function agregarProducto(id, nombre) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
     });
-
 }
 
 function obtenerBorradorOT() {
@@ -81,7 +85,7 @@ function obtenerBorradorOT() {
                 <div class="card col-12 p-2" style="height: 100px">
                     <h5>${prodOT.nombre}</h5>
                     <p style="text-align: right;">Pedido: <strong>${prodOT.pedido}</strong></p>
-                    <button class="btn btn-danger" style="width: 40%; margin-left: auto; margin-right: auto;">Quitar</button>
+                    <button class="btn btn-danger" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="quitarDeOT('${e.id}')">Quitar</button>
                 </div>
                 `;
             }
@@ -93,4 +97,8 @@ function obtenerBorradorOT() {
             document.getElementById('listaOT').innerHTML = html;
         }
     });
+}
+
+function quitarDeOT(id) {
+    actualizarCantidadPedido(id, 0);
 }

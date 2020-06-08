@@ -55,24 +55,30 @@
                   <div>
                     <h4>Productos</h4>
                   </div>
+                </div>
+                <div class="col-6">
+                  <div>
+                    <h4>Productos agregados a OT</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
                   <div id="listaProd" class="row p-4 mr-3" style="height: 280pt; position: absolute; overflow: scroll;">
                     <div class="card col-12 p-2">
                       <h5>ASDF</h5>
                       <p class="mt-2">Descripcion</p>
                       <p style="text-align: right;">Precio: 234.00</p>
-                      <button class="btn btn-info" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="agregarProducto(id, nombre)">Agregar a OT</button>
+                      <button class="btn btn-info" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="agregarProductoAOT(id, nombre)">Agregar a OT</button>
                     </div>
                   </div>
                 </div>
-                <div class="col-6" style="padding-right: 10px;">
-                    <div>
-                      <h4>Productos agregados a OT</h4>
-                    </div>
-                    <div id="listaOT" class="row p-4 ml-3" style="width: 100%; height: 280pt; position: absolute; overflow: scroll;">
+                <div class="col-6">
+                    <div id="listaOT" class="row p-4" style="width: 100%; height: 280pt; position: absolute; overflow: scroll;">
                       <div class="card col-12 p-2">
                         <h5>ASDF</h5>
                         <p style="text-align: right;">Precio: 234.00</p>
-                        <button class="btn btn-danger" style="width: 40%; margin-left: auto; margin-right: auto;">Quitar</button>
+                        <button class="btn btn-danger" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="quitarDeOT(id)">Quitar</button>
                       </div>
                     </div>
                 </div>
