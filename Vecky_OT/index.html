@@ -24,20 +24,65 @@
   <body style="background-image: url('./imgs/background.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     
     <div class="container">
+
+      <!-- LOGIN -->
+      <div id="divLogin" hidden>
         <div class="d-flex" style="justify-content: center; align-items: center; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">
             <div class="card shadow" style="border-radius: 20px; border-bottom-right-radius: 60px; border-bottom-left-radius: 60px;" >
                 <div class="card-body text-center">
                   <h3 class="card-title text-center">Inicio de sesión</h3>
                   <hr style="width: 75%;">
-                  <p class="mb-1" style="font-size: 15pt;">Correo</p>
-                  <input type="text" class="form-control" placeholder="@email.com" style="width: 300px;">
-                  <p class="mt-3 mb-1" style="font-size: 15pt;">Contraseña</p>
-                  <input type="password" class="form-control" placeholder="***" style="width: 300px;">
-                  <p class="card-text text-center"></p>
-                  <a href="#" class="btn btn-primary mb-3 mt-2" style="width: 90%; border-radius: 10px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">Iniciar sesión</a>
+                  <form id="formLogin">
+                    <p class="mb-1" style="font-size: 15pt;">Correo</p>
+                    <input type="text" name="correo" class="form-control" placeholder="@email.com" style="width: 300px;">
+                    <p class="mt-3 mb-1" style="font-size: 15pt;">Contraseña</p>
+                    <input type="password" name="contrasena" class="form-control" placeholder="***" style="width: 300px;">
+                    <p class="card-text text-center"></p>
+                    <button type="submit" href="#" class="btn btn-primary mb-3 mt-2" style="width: 90%; border-radius: 10px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">Iniciar sesión</button>
+                  </form>
                 </div>
               </div>
         </div>
+      </div>
+
+      <!-- Sistema OT -->
+      <div id="divOT" >
+        <div class="d-flex" style="justify-content: center; align-items: center; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">
+          <div class="card shadow" style="width: 670pt; height: 350pt; border-radius: 20px;">
+            <div class="m-4">
+              <div class="row">
+                <div class="col-6">
+                  <div>
+                    <h4>Productos</h4>
+                  </div>
+                  <div id="listaProd" class="row p-4 mr-3" style="height: 280pt; position: absolute; overflow: scroll;">
+                    <div class="card col-12 p-2">
+                      <h5>ASDF</h5>
+                      <p class="mt-2">Descripcion</p>
+                      <p style="text-align: right;">Precio: 234.00</p>
+                      <button class="btn btn-info" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="agregarProducto(id, nombre)">Agregar a OT</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6" style="padding-right: 10px;">
+                    <div>
+                      <h4>Productos agregados a OT</h4>
+                    </div>
+                    <div id="listaOT" class="row p-4 ml-3" style="width: 100%; height: 280pt; position: absolute; overflow: scroll;">
+                      <div class="card col-12 p-2">
+                        <h5>ASDF</h5>
+                        <p style="text-align: right;">Precio: 234.00</p>
+                        <button class="btn btn-danger" style="width: 40%; margin-left: auto; margin-right: auto;">Quitar</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
     </div>
 
     <!-- Optional JavaScript -->
@@ -51,8 +96,14 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 
+    <!-- Swal alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
     <script src="../firebase/js/db.js"></script>
+    <script src="./scripts/manageWindows.js"></script>
     <script src="./scripts/principal.js"></script>
+    
+
 
   </body>
 </html>
