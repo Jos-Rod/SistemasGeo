@@ -1,12 +1,16 @@
 
 const auth = firebase.auth();
 var formLogin = document.getElementById('formLogin');
+var pedidos = {};
+var productos = [];
+
 
 auth.onAuthStateChanged( user => {
     if (user) {
         logeado();
         obtenerProductos();
         obtenerBorradorOT();
+        obtenerChoferes();
 
     } else {
         console.log("Usuario no logeado")
@@ -43,7 +47,6 @@ function obtenerProductos() {
                 <button class="btn btn-info" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="agregarProductoAOT('${d.id}', '${prod.nombre}')">Agregar a OT</button>
             </div>
             `;
-            
         });
         document.getElementById('listaProd').innerHTML = html;
     });
@@ -64,7 +67,7 @@ async function agregarProductoAOT(id, nombre) {
 
 function actualizarCantidadPedido(id, cantidad) {
     db.collection("veckyProductos").doc(id).update({
-        pedido: cantidad
+        pedido: parseInt(cantidad)
     })
     .then(function() {
         console.log("Document successfully updated!");
@@ -113,18 +116,64 @@ function crearOT() {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Crear OT'
       }).then((result) => {
         if (result.value) {
 
             // crear la OT
-            
+            obtenerPedidos();
 
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
+        //   Swal.fire(
+        //     'Deleted!',
+        //     'Your file has been deleted.',
+        //     'success'
+        //   );
         }
-      })
+      });
+}
+
+function obtenerPedidos() {
+    pedidos = {};
+    db.collection("veckyProductos").get().then( doc => {
+        doc.docs.forEach(d => {
+            if (d.data().pedido > 0) {
+                pedidos[d.id] = d.data().pedido;
+            }            
+        });
+        
+        const choferSelected = document.getElementById('inputGroupSelect').value;
+        // obtener chofer seleccionado
+        db.collection("veckyChoferes").doc(choferSelected).update({
+            pedido: pedidos
+        })
+        .then(function() {
+
+            for (var key in pedidos) {
+                quitarDeOT(key);
+            }
+
+              Swal.fire(
+                'OT Creada!',
+                'La OT ha sido creada.',
+                'success'
+              );
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+
+    });
+}
+
+function obtenerChoferes() {
+    db.collection("veckyChoferes").get().then( doc => {
+        var html = ``;
+        doc.docs.forEach(d => {
+            html += `
+                <option value="${d.id}">${d.data().nombre} ${d.data().apellido}</option>
+            `;
+        });
+        document.getElementById('inputGroupSelect').innerHTML = html;
+    });
 }
