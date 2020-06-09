@@ -92,13 +92,39 @@ function obtenerBorradorOT() {
         });
         if (html == ``) {
             document.getElementById('listaOT').hidden = true;
+            document.getElementById('divAcciones').hidden = true;
         } else {
             document.getElementById('listaOT').hidden = false;
             document.getElementById('listaOT').innerHTML = html;
+            document.getElementById('divAcciones').hidden = false;
         }
     });
 }
 
 function quitarDeOT(id) {
     actualizarCantidadPedido(id, 0);
+}
+
+function crearOT() {
+    Swal.fire({
+        title: 'Crear OT',
+        text: "Vas a crear la orden de traslado",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+
+            // crear la OT
+            
+
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
 }
