@@ -11,11 +11,22 @@ auth.onAuthStateChanged( user => {
         obtenerProductos();
         obtenerBorradorOT();
         obtenerChoferes();
-
+        if (user.email == "pedro@pedro.com") {
+            modoMapa();
+            document.getElementById('correoChofer').innerHTML = `Correo: ${user.email}`;
+            obtenerInfoChofer(user.email);
+        }
     } else {
-        console.log("Usuario no logeado")
+        console.log("Usuario no logeado");
+        noLoggeado();
     }
 });
+
+function salir() {
+    auth.signOut().then( () => {
+        noLoggeado();
+    });
+}
 
 formLogin.addEventListener("submit", (e) => {
     e.preventDefault(); // evitar el reload
@@ -175,5 +186,28 @@ function obtenerChoferes() {
             `;
         });
         document.getElementById('inputGroupSelect').innerHTML = html;
+    });
+}
+
+function obtenerInfoChofer(email) {
+    db.collection("veckyChoferes").onSnapshot( snap => {
+        snap.docs.forEach(e => {
+            console.log(e);
+            if (e.data().email == email) {
+                var siHay = false;
+                for (var key in e.data().pedido) {
+                    siHay = true
+                }
+
+                if (siHay) {
+                    console.log("Existen pedidos");
+                    compartirUbicacion(e.id);
+                } else {
+                    console.log("No existen pedidos");
+                    alert("El pedido ha terminado");
+                    salir();
+                }
+            }
+        });
     });
 }
