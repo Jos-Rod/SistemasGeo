@@ -192,7 +192,6 @@ function obtenerChoferes() {
 function obtenerInfoChofer(email) {
     db.collection("veckyChoferes").onSnapshot( snap => {
         snap.docs.forEach(e => {
-            console.log(e);
             if (e.data().email == email) {
                 var siHay = false;
                 for (var key in e.data().pedido) {

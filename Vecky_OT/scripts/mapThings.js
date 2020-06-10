@@ -7,6 +7,7 @@ var idChoferVer = "";
 function compartirUbicacion(idChofer) {
     compartirUbicacionBool = true;
     idChoferVer = idChofer;
+    console.log("Compartiendo ubicacion fucion");
 }
 
 var coordinates = {
