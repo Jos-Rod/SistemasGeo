@@ -31,6 +31,7 @@ function initMap() {
 
 function moverPosicion() {
     if (compartirUbicacionBool) {
+        console.log("Compartiendo ubicacion");
         navigator.geolocation.getCurrentPosition( position => {
             var pos = {
                 lat: position.coords.latitude,

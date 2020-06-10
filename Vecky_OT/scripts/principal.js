@@ -203,6 +203,7 @@ function obtenerInfoChofer(email) {
                     console.log("Existen pedidos");
                     compartirUbicacion(e.id);
                 } else {
+                    compartirUbicacionBool = false;
                     console.log("No existen pedidos");
                     alert("El pedido ha terminado");
                     salir();
