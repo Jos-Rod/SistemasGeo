@@ -23,33 +23,33 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), propiedades);
 
     if (navigator.geolocation) {
+        // window.addEventListener('locationchange', function(){
+        //     console.log('location changed!');
+        //     moverPosicion(marker);
+        // });
         navigator.geolocation.getCurrentPosition(moverPosicion);
-        window.addEventListener('locationchange', function(){
-            console.log('location changed!');
-            moverPosicion(marker);
-        });
     }
 }
 
-function moverPosicion() {
-    if (compartirUbicacionBool) {
-        console.log("Compartiendo ubicacion");
-        navigator.geolocation.getCurrentPosition( position => {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            console.log("Posision");
-            console.log(pos);
+// function moverPosicion() {
+//     if (compartirUbicacionBool) {
+//         console.log("Compartiendo ubicacion");
+//         navigator.geolocation.getCurrentPosition( position => {
+//             var pos = {
+//                 lat: position.coords.latitude,
+//                 lng: position.coords.longitude
+//             };
+//             console.log("Posision");
+//             console.log(pos);
     
-            // update firebase location
-            db.collection("veckyChoferes").doc(idChoferVer).update({
-                watcherLocation: new firebase.firestore.GeoPoint(pos.lat, pos.lng)
-            });
+//             // update firebase location
+//             db.collection("veckyChoferes").doc(idChoferVer).update({
+//                 watcherLocation: new firebase.firestore.GeoPoint(pos.lat, pos.lng)
+//             });
     
-        });
-    }
-}
+//         });
+//     }
+// }
 
 function moverPosicion(pos) {
     if (compartirUbicacionBool) {
@@ -58,12 +58,17 @@ function moverPosicion(pos) {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
         };
-        console.log("Posision");
+        console.log("Posición");
         console.log(pos);
 
         // update firebase location
         db.collection("veckyChoferes").doc(idChoferVer).update({
             watcherLocation: new firebase.firestore.GeoPoint(pos.lat, pos.lng)
         });
+        setTimeout(() => {
+            navigator.geolocation.getCurrentPosition(moverPosicion);
+        }, 5000);
+    } else {
+
     }
 }
