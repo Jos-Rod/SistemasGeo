@@ -3,12 +3,14 @@ const auth = firebase.auth();
 var formLogin = document.getElementById('formLogin');
 var pedidos = {};
 var productos = [];
+var map;
 
 
 auth.onAuthStateChanged( user => {
     if (user) {
-        // logeado();
-        verWatcher();
+        logeado();
+        infoWatcher();
+
         obtenerProductos();
         obtenerBorradorOT();
         obtenerChoferes();
@@ -134,12 +136,6 @@ function crearOT() {
 
             // crear la OT
             obtenerPedidos();
-
-        //   Swal.fire(
-        //     'Deleted!',
-        //     'Your file has been deleted.',
-        //     'success'
-        //   );
         }
       });
 }
@@ -210,5 +206,43 @@ function obtenerInfoChofer(email) {
                 }
             }
         });
+    });
+}
+
+var markers = [];
+function infoWatcher() {
+    db.collection("veckyChoferes").get().then( doc => {
+        var html = ``;
+        
+        doc.docs.forEach(d => {
+
+            var siHay = false;
+            for (var key in d.data().pedido) {
+                siHay = true;
+            }
+
+            if (siHay) {
+                html += `
+                    <div style="background-color: beige; border-top-left-radius: 15px; border-bottom-left-radius: 15px; margin-bottom: 10px;">
+                    <div class="p-2 pl-4" style="text-align: left;">
+                        <h5>Chofer: ${d.data().nombre} ${d.data().apellido}</h5>
+                        <p>email: ${d.data().email}m</p>
+                        <button class="btn btn-info" style="display: flex; margin-left: auto; border-top-left-radius: 18px; border-bottom-left-radius: 13px;">Ver ubicación</button>
+                    </div>
+                    </div>
+                `;
+
+                // agregar marker
+                markers.push(
+                    new google.maps.Marker({
+                        position: {lat: d.data().watcherLocation.latitude, lng: d.data().watcherLocation.longitude },
+                        label: `${d.data().nombre} ${d.data().apellido}`,
+                        map: map
+                    })
+                );
+            }
+
+        });
+        document.getElementById('listaChoferesMapa').innerHTML = html;
     });
 }

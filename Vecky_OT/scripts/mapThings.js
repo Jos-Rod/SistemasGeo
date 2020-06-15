@@ -31,26 +31,6 @@ function initMap() {
     }
 }
 
-// function moverPosicion() {
-//     if (compartirUbicacionBool) {
-//         console.log("Compartiendo ubicacion");
-//         navigator.geolocation.getCurrentPosition( position => {
-//             var pos = {
-//                 lat: position.coords.latitude,
-//                 lng: position.coords.longitude
-//             };
-//             console.log("Posision");
-//             console.log(pos);
-    
-//             // update firebase location
-//             db.collection("veckyChoferes").doc(idChoferVer).update({
-//                 watcherLocation: new firebase.firestore.GeoPoint(pos.lat, pos.lng)
-//             });
-    
-//         });
-//     }
-// }
-
 function moverPosicion(pos) {
     if (compartirUbicacionBool) {
         console.log("Compartiendo ubicacion por primera vez...");
