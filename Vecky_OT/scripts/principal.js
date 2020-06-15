@@ -7,7 +7,8 @@ var productos = [];
 
 auth.onAuthStateChanged( user => {
     if (user) {
-        logeado();
+        // logeado();
+        verWatcher();
         obtenerProductos();
         obtenerBorradorOT();
         obtenerChoferes();
