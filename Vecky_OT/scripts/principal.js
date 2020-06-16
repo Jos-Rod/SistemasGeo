@@ -233,14 +233,13 @@ function infoWatcher() {
                     </div>
                 `;
 
+                var marker = new google.maps.Marker({
+                    position: {lat: d.data().watcherLocation.latitude, lng: d.data().watcherLocation.longitude },
+                    label: `${d.data().nombre} ${d.data().apellido}`,
+                    map: map
+                });
                 // agregar marker
-                markers.push(
-                    new google.maps.Marker({
-                        position: {lat: d.data().watcherLocation.latitude, lng: d.data().watcherLocation.longitude },
-                        label: `${d.data().nombre} ${d.data().apellido}`,
-                        map: map
-                    })
-                );
+                markers.push(marker);
             }
 
         });
