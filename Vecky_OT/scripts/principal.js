@@ -254,13 +254,13 @@ function centrarEnMapa(lat, lon) {
     })
 }
 
-function setMapOnAll(map) {
+function setMapOnAll() {
     for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
+      markers[i].setMap(null);
     }
   }
 
   // Removes the markers from the map, but keeps them in the array.
   function clearMarkers() {
-    setMapOnAll(null);
+    setMapOnAll();
   }
