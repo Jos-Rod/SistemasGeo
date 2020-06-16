@@ -7,7 +7,6 @@ var idChoferVer = "";
 function compartirUbicacion(idChofer) {
     compartirUbicacionBool = true;
     idChoferVer = idChofer;
-    console.log("Compartiendo ubicacion fucion");
 }
 
 var coordinates = {
@@ -36,12 +35,11 @@ function initMap() {
 
 function moverPosicion(pos) {
     if (compartirUbicacionBool) {
-        console.log("Compartiendo ubicacion por primera vez...");
         var pos = {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
         };
-        console.log("Posición");
+        console.log("Lat lon:");
         console.log(pos);
 
         // update firebase location

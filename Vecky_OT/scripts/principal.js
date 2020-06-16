@@ -211,7 +211,8 @@ function obtenerInfoChofer(email) {
 
 var markers = [];
 function infoWatcher() {
-    db.collection("veckyChoferes").get().then( doc => {
+    markers = [];
+    db.collection("veckyChoferes").onSnapshot(doc => { //.onSnapshot( snap => {
         var html = ``;
         
         doc.docs.forEach(d => {
