@@ -23,6 +23,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), propiedades);
 
     if (navigator.geolocation) {
+        console.log("Geo location activated");
         // window.addEventListener('locationchange', function(){
         //     console.log('location changed!');
         //     moverPosicion(marker);
