@@ -16,7 +16,7 @@ var coordinates = {
 }
 var propiedades = {
     center: coordinates,
-    zoom: 20
+    zoom: 14
 }
 
 function initMap() {

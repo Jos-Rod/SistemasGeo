@@ -227,7 +227,7 @@ function infoWatcher() {
                     <div class="p-2 pl-4" style="text-align: left;">
                         <h5>Chofer: ${d.data().nombre} ${d.data().apellido}</h5>
                         <p>email: ${d.data().email}m</p>
-                        <button class="btn btn-info" style="display: flex; margin-left: auto; border-top-left-radius: 18px; border-bottom-left-radius: 13px;">Ver ubicación</button>
+                        <button class="btn btn-info" style="display: flex; margin-left: auto; border-top-left-radius: 18px; border-bottom-left-radius: 13px;"onclick="centrarEnMapa(${d.data().watcherLocation.latitude}, ${d.data().watcherLocation.longitude})">Ver ubicación</button>
                     </div>
                     </div>
                 `;
@@ -245,4 +245,11 @@ function infoWatcher() {
         });
         document.getElementById('listaChoferesMapa').innerHTML = html;
     });
+}
+
+function centrarEnMapa(lat, lon) {
+    map.setCenter({
+        lat: lat, 
+        lng: lon
+    })
 }
