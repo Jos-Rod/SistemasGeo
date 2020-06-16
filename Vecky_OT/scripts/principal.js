@@ -211,7 +211,7 @@ function obtenerInfoChofer(email) {
 
 var markers = [];
 function infoWatcher() {
-    markers = [];
+    clearMarkers();
     db.collection("veckyChoferes").onSnapshot(doc => { //.onSnapshot( snap => {
         var html = ``;
         
@@ -253,3 +253,14 @@ function centrarEnMapa(lat, lon) {
         lng: lon
     })
 }
+
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
+
+  // Removes the markers from the map, but keeps them in the array.
+  function clearMarkers() {
+    setMapOnAll(null);
+  }
