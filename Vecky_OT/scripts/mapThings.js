@@ -28,7 +28,9 @@ function initMap() {
         //     console.log('location changed!');
         //     moverPosicion(marker);
         // });
-        navigator.geolocation.getCurrentPosition(moverPosicion);
+        setTimeout(() => {
+            navigator.geolocation.getCurrentPosition(moverPosicion);
+        }, 7000);
     }
 }
 
