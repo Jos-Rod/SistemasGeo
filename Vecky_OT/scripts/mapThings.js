@@ -50,6 +50,8 @@ function moverPosicion(pos) {
             navigator.geolocation.getCurrentPosition(moverPosicion);
         }, 5000);
     } else {
-
+        setTimeout(() => {
+            navigator.geolocation.getCurrentPosition(moverPosicion);
+        }, 5000);
     }
 }
