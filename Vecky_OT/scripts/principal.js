@@ -264,3 +264,18 @@ function setMapOnAll() {
   function clearMarkers() {
     setMapOnAll();
   }
+
+
+function terminarOT() {
+    console.log("ASDF");
+    db.collection("veckyChoferes").doc("t4Tjh4ze5oiIuI7pWgxL").update({
+        pedido: []
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+}
