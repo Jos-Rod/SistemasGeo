@@ -99,7 +99,7 @@ function obtenerBorradorOT() {
             if (e.data().pedido > 0) {
                 const prodOT = e.data();
                 html += `
-                <div class="card col-12 p-2" style="height: 100px">
+                <div class="card col-12 p-2 mt-4" style="height: 100px">
                     <h5>${prodOT.nombre}</h5>
                     <p style="text-align: right;">Pedido: <strong>${prodOT.pedido}</strong></p>
                     <button class="btn btn-danger" style="width: 40%; margin-left: auto; margin-right: auto;" onclick="quitarDeOT('${e.id}')">Quitar</button>
